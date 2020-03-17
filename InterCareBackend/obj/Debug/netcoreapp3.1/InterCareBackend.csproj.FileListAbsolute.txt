@@ -1,0 +1,17 @@
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.exe
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.deps.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.runtimeconfig.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.runtimeconfig.dev.json
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.dll
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\bin\Debug\netcoreapp3.1\InterCareBackend.pdb
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\staticwebassets\InterCareBackend.StaticWebAssets.Manifest.cache
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\staticwebassets\InterCareBackend.StaticWebAssets.xml
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.AssemblyInfoInputs.cache
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.AssemblyInfo.cs
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.RazorTargetAssemblyInfo.cache
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.dll
+C:\Users\SaltO\source\repos\InterCareBachelor\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.pdb
