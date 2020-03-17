@@ -32,3 +32,7 @@ C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netco
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.RazorTargetAssemblyInfo.cache
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.pdb
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\JWT.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csproj.CopyComplete

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareVue\\InterCareVue.csproj": {}
+    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareVue\\InterCareVue.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareVue\\InterCareVue.csproj": {
+    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareVue\\InterCareVue.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareVue\\InterCareVue.csproj",
+        "projectUniqueName": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareVue\\InterCareVue.csproj",
         "projectName": "InterCareVue",
-        "projectPath": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareVue\\InterCareVue.csproj",
+        "projectPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareVue\\InterCareVue.csproj",
         "packagesPath": "C:\\Users\\SaltO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareVue\\obj\\",
+        "outputPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareVue\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
