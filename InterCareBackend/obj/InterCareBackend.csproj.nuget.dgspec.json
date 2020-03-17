@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareBackend\\InterCareBackend.csproj": {}
+    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareBackend\\InterCareBackend.csproj": {
+    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareBackend\\InterCareBackend.csproj",
+        "projectUniqueName": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
         "projectName": "InterCareBackend",
-        "projectPath": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareBackend\\InterCareBackend.csproj",
+        "projectPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
         "packagesPath": "C:\\Users\\SaltO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SaltO\\source\\repos\\InterCareBachelor\\InterCareBackend\\obj\\",
+        "outputPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "JWT": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
