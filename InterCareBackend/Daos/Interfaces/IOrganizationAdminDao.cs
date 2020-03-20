@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace InterCareBackend.Models
+namespace InterCareBackend.Daos.Interfaces
 {
-    public class Class
+    public interface IOrganizationAdmin
     {
+
+
+
     }
 }
