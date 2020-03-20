@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
-    interface IUser
+    public interface IUser
     {
 
         String Email { get; set; }
