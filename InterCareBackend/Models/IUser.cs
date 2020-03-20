@@ -11,7 +11,7 @@ namespace InterCareBackend.Models
         String Email { get; set; }
         String Password { get; set; }
         String FullName { get; set; }
-        int AccessLevel { get; set; }
+        String AccessLevel { get; set; }
 
         void Login();
         void Logout(); 

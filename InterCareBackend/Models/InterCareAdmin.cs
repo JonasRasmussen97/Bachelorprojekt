@@ -10,7 +10,7 @@ namespace InterCareBackend.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
-        public int AccessLevel { get; set; }
+        public string AccessLevel { get; set; }
 
         public void Login()
         {

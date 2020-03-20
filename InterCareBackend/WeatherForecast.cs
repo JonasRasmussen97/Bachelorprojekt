@@ -1,3 +1,5 @@
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 
 namespace InterCareBackend
@@ -13,6 +15,11 @@ namespace InterCareBackend
         public string Summary { get; set; }
 
         public string BigAss { get; set; }
+
+        public void connectToDatabase()
+        {
+            
+        }
 
     }
 }
