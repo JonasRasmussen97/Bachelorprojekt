@@ -44,6 +44,10 @@
             "JWT": {
               "target": "Package",
               "version": "[6.1.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.10.2, )"
             }
           },
           "imports": [
