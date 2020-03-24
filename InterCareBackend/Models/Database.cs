@@ -15,6 +15,7 @@ namespace InterCareBackend.Models
         MongoClient dbClient;
         IMongoDatabase database;
         IMongoCollection<BsonDocument> collection;
+        IMongoCollection<BsonDocument> collection2;
         FilterDefinition<BsonDocument> filter;
    
 
@@ -23,29 +24,28 @@ namespace InterCareBackend.Models
             this.DatabaseName = DatabaseName;
             this.CollectionName = CollectionName;
 
-            dbClient = new MongoClient("mongodb+srv://InterCare:Jonas@intercarebachelor-lctyd.azure.mongodb.net/test?retryWrites=true&w=majority");
+            dbClient = new MongoClient("mongodb+srv://InterCare:Julian123@intercarebachelor-lctyd.azure.mongodb.net/test?retryWrites=true&w=majority");
             database = dbClient.GetDatabase(DatabaseName);
             collection = database.GetCollection<BsonDocument>(CollectionName);
         }
 
-        public User getUserByName(String name)
+        public Database(String DatabaseName, String CollectionName, String CollectionName2)
         {
-
-            // Query searches for any record with
-            filter = Builders<BsonDocument>.Filter.Eq("Name", name);
-
-            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
-            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
-            // Make a JObject from the JSON returned by MongoDB.
-            JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
-
-                
-            return new User((string) jUser["Name"], (string) jUser["Password"], (string) jUser["FullName"], (string) jUser["AccessLevel"]);
+            dbClient = new MongoClient("mongodb+srv://InterCare:Julian123@intercarebachelor-lctyd.azure.mongodb.net/test?retryWrites=true&w=majority");
+            database = dbClient.GetDatabase(DatabaseName);
+            collection = database.GetCollection<BsonDocument>(CollectionName);
+            collection2 = database.GetCollection<BsonDocument>(CollectionName2);
         }
+
+        public void setCollection(String collectionName)
+        {
+            this.CollectionName = collectionName;
+            collection = database.GetCollection<BsonDocument>(collectionName);
+        }
+
 
         public User getUserByEmail(String email)
         {
-
             // Query searches for any record with the email parameter being the entered email.
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
 
@@ -54,8 +54,26 @@ namespace InterCareBackend.Models
             // Make a JObject from the JSON returned by MongoDB.
             JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
 
-            return new User((string)jUser["Name"], (string)jUser["Password"], (string)jUser["FullName"], (string)jUser["AccessLevel"]);
+            return new User((string)jUser["Email"], (string)jUser["Password"], (string)jUser["FullName"], (string)jUser["AccessLevel"]);
         }
+
+        public void createLocation(string name, string address, string postalCode, string country, string manager)
+        {
+            var document = new BsonDocument
+            {
+            { "Name", name },
+            { "Address", address },
+            {"PostalCode", postalCode },
+            {"Country", country },
+            {"Managers", new BsonArray { manager } }
+         };
+            collection.InsertOne(document);
+        }
+
+
+
+
+
 
         public Boolean checkLogin(String username, String password)
         {

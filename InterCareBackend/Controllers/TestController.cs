@@ -19,15 +19,15 @@ namespace InterCareBackend.Controllers
     [ApiController]
     public class TestController : ControllerBase
     {
-        Database db = new Database("InterCare", "users");
+        Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         
-
-        [Authorize]
+ 
         [HttpGet("/api/")]
         public String Get()
         {
-            return db.getUserByName("Jonas").FullName;
+            db.setCollection("users");
+            return db.getUserByEmail("Test@email.com").FullName;
         }
 
         [HttpPost("/api/login")]
@@ -35,6 +35,13 @@ namespace InterCareBackend.Controllers
         {
             var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
             return Ok(new { token = tokenString });
+        }
+
+        [HttpPost("/api/createLocation")]
+            public void createLocation()
+        {
+            db.setCollection("locations");
+            db.createLocation(Request.Form["name"], Request.Form["address"], Request.Form["postalcode"], Request.Form["country"], Request.Form["manager"]);
         }
 
     }
