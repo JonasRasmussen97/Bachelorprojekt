@@ -7,15 +7,25 @@ namespace InterCareBackend.Models
 {
     public class Client : IUser
     {
+        public String id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string FullName { get; set; }
         public string AccessLevel { get; set; }
         public string Gender { get; set; }
-        public int Age { get; set; }
+        public string Age { get; set; }
 
-        Client()
+    
+
+        public Client(string id, string email, string password, string fullName, string accessLevel, string gender, string age)
         {
+            this.id = id;
+            Email = email;
+            Password = password;
+            FullName = fullName;
+            AccessLevel = accessLevel;
+            Gender = gender;
+            Age = age;
             // Defines the access level of a client upon instantiation of object. 
             AccessLevel = "0";
         }

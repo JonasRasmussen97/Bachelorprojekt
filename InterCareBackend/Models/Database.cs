@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
 using System;
@@ -15,7 +16,6 @@ namespace InterCareBackend.Models
         MongoClient dbClient;
         IMongoDatabase database;
         IMongoCollection<BsonDocument> collection;
-        IMongoCollection<BsonDocument> collection2;
         FilterDefinition<BsonDocument> filter;
    
 
@@ -29,14 +29,6 @@ namespace InterCareBackend.Models
             collection = database.GetCollection<BsonDocument>(CollectionName);
         }
 
-        public Database(String DatabaseName, String CollectionName, String CollectionName2)
-        {
-            dbClient = new MongoClient("mongodb+srv://InterCare:Julian123@intercarebachelor-lctyd.azure.mongodb.net/test?retryWrites=true&w=majority");
-            database = dbClient.GetDatabase(DatabaseName);
-            collection = database.GetCollection<BsonDocument>(CollectionName);
-            collection2 = database.GetCollection<BsonDocument>(CollectionName2);
-        }
-
         public void setCollection(String collectionName)
         {
             this.CollectionName = collectionName;
@@ -44,19 +36,33 @@ namespace InterCareBackend.Models
         }
 
 
+        // DENNE METODE ER DEN NYESTE OG DE ANDRE SKAL OPDATERES TIL OGSÅ AT BRUGE BSONSERIALIZER.
         public User getUserByEmail(String email)
         {
             // Query searches for any record with the email parameter being the entered email.
+            setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
 
-            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
-            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
-            // Make a JObject from the JSON returned by MongoDB.
-            JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
+            // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
+            var user = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
 
-            return new User((string)jUser["Email"], (string)jUser["Password"], (string)jUser["FullName"], (string)jUser["AccessLevel"]);
+          return new User(user["_id"].ToString(), user["Email"].ToString(), user["Password"].ToString(), user["FullName"].ToString(), user["AccessLevel"].ToString());
         }
 
+        public Client getClientFromUser(String email)
+        {
+            // Query searches for any record with the email parameter being the entered email.
+            setCollection("users");
+            var user = getUserByEmail(email);
+            setCollection("clients");
+            filter = Builders<BsonDocument>.Filter.Eq("_id", "ObjectId(" + user.id + ")");
+            var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
+            System.Diagnostics.Debug.WriteLine(client.ToString());
+            return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["gender"].ToString(), client["age"].ToString());
+        }
+
+
+        // LOCATION OPERATIONS
         public void createLocation(string name, string address, string postalCode, string country, string manager)
         {
             var document = new BsonDocument
@@ -66,8 +72,11 @@ namespace InterCareBackend.Models
             {"PostalCode", postalCode },
             {"Country", country },
             {"Managers", new BsonArray { manager } }
+            
          };
+
             collection.InsertOne(document);
+            System.Diagnostics.Debug.WriteLine(document["_id"].ToString());
         }
 
         // Takes the name of the location and the field we want to update, and the value we want to update it with.
@@ -78,10 +87,32 @@ namespace InterCareBackend.Models
             var result = collection.UpdateOne(filter, update);
         }
 
-     
+        // Also removes the connected location manager because he cannot exist without a location.
+        public void removeLocationByName(String name)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            collection.DeleteOne(filter);
+        }
+
+        // Removes LocationManager. Used together with the removeLocationByName method.
+        public void removeLocationManagerByName(String name)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            collection.DeleteOne(filter);
+        }
+
+    
+        // USER OPERATIONS
+        public void removeUserByEmail(String email)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
+            collection.DeleteOne(filter);
+        }
 
 
 
+
+        // LOGIN OPERATIONS
         public Boolean checkLogin(String username, String password)
         {
             // Query searches for any record with the email parameter being the entered email(username).
@@ -108,11 +139,7 @@ namespace InterCareBackend.Models
             return false;
         }
 
-        public void removeUserByEmail(String email)
-        {
-            var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
-            collection.DeleteOne(filter);
-        }
+        
 
 
     }

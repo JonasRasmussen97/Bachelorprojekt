@@ -1,17 +1,9 @@
 ﻿
 using InterCareBackend.Helpers;
 using InterCareBackend.Models;
-using JWT.Algorithms;
-using JWT.Builder;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver.Core;
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Controllers
 {
@@ -27,7 +19,7 @@ namespace InterCareBackend.Controllers
         public String Get()
         {
             db.setCollection("users");
-            return db.getUserByEmail("Test@email.com").FullName;
+            return db.getUserByEmail("Thomas@email.com").id;
         }
 
         [HttpPost("/api/login")]
@@ -51,11 +43,30 @@ namespace InterCareBackend.Controllers
             db.updateLocation(Request.Form["locationName"], Request.Form["updateField"], Request.Form["updateValue"]);
         }
 
+        [HttpDelete("/api/removeLocation")]
+        public void removeLocation(String name)
+        {
+            // 1. Remove location 2. Remove location manager from 'location_managers' collection 3. Remove connected user profile from 'users' collection. 
+            db.setCollection("locations");
+            db.removeLocationByName(name);
+            db.setCollection("location_managers");
+            db.removeLocationManagerByName("");
+            db.setCollection("users");
+            db.removeUserByEmail("");
+        }
+
+
         [HttpDelete("/api/deleteUser")]
         public void deleteUser()
         {
             db.setCollection("users");
             db.removeUserByEmail(Request.Form["email"]);
+        }
+
+        [HttpGet("/api/getClientFromUser")]
+        public String getClientFromUser()
+        {
+            return db.getClientFromUser("BOB@hotmail.dk").ToString();
         }
 
     }
