@@ -50,7 +50,6 @@ namespace InterCareBackend.Controllers
             db.setCollection("locations");
             db.updateLocation(Request.Form["locationName"], Request.Form["updateField"], Request.Form["updateValue"]);
 
-        }
         [HttpDelete("/api/deleteUser")]
         public void deleteUser()
         {
