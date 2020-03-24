@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Daos\Implementations\ClientDao.cs" />
+    <Compile Remove="Daos\Implementations\InterCareAdminDao.cs" />
+    <Compile Remove="Daos\Implementations\LocationDao.cs" />
+    <Compile Remove="Daos\Implementations\LocationManagerDao.cs" />
+    <Compile Remove="Daos\Implementations\OrganizationAdminDao.cs" />
+    <Compile Remove="Daos\Implementations\OrganizationDao.cs" />
+    <Compile Remove="Daos\Interfaces\IClientDao.cs" />
+    <Compile Remove="Daos\Interfaces\IInterCareAdminDao.cs" />
+    <Compile Remove="Daos\Interfaces\ILocationDao.cs" />
+    <Compile Remove="Daos\Interfaces\ILocationManagerDao.cs" />
+    <Compile Remove="Daos\Interfaces\IOrganizationAdminDao.cs" />
+    <Compile Remove="Daos\Interfaces\IOrganizationDao.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JWT" Version="6.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />

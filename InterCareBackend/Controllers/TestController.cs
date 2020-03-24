@@ -44,5 +44,12 @@ namespace InterCareBackend.Controllers
             db.createLocation(Request.Form["name"], Request.Form["address"], Request.Form["postalcode"], Request.Form["country"], Request.Form["manager"]);
         }
 
+        [HttpDelete("/api/deleteUser")]
+        public void deleteUser()
+        {
+            db.setCollection("users");
+            db.removeUserByEmail(Request.Form["email"]);
+        }
+
     }
 }
