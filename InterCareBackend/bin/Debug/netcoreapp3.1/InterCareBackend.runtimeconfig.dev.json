@@ -2,7 +2,7 @@
   "runtimeOptions": {
     "additionalProbingPaths": [
       "C:\\Users\\finch\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\finch\\.nuget\\packages",
+      "C:\\Users\\SaltO\\.nuget\\packages",
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ]
   }

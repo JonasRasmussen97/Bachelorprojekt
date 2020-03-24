@@ -49,6 +49,33 @@ namespace InterCareBackend.Models
           return new User(user["_id"].ToString(), user["Email"].ToString(), user["Password"].ToString(), user["FullName"].ToString(), user["AccessLevel"].ToString());
         }
 
+        public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
+        {
+            var userDocument = new BsonDocument
+            {
+                { "Email", email },
+                { "FullName", fullName },
+                { "Password", password},
+                { "AccessLevel", accessLevel }
+            };
+
+            setCollection("users");
+            collection.InsertOne(userDocument);
+
+            var userId = userDocument["_id"].ToString();
+
+            var clientDocument = new BsonDocument
+            {
+                { "userId", userId },
+                { "Gender", gender },
+                { "Age", age }
+            };
+
+            setCollection("clients");
+            collection.InsertOne(clientDocument);
+        }
+
+
         public Client getClientFromUser(String email)
         {
             // Query searches for any record with the email parameter being the entered email.

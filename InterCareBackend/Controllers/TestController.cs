@@ -55,6 +55,12 @@ namespace InterCareBackend.Controllers
             db.removeUserByEmail("");
         }
 
+        [HttpPut("/api/createClient")]
+        public void createClient()
+        {
+            db.createClient(Request.Form["email"], Request.Form["fullName"], Request.Form["password"], Request.Form["accessLevel"], Request.Form["gender"], Request.Form["age"]);
+        }
+
 
         [HttpDelete("/api/deleteUser")]
         public void deleteUser()
