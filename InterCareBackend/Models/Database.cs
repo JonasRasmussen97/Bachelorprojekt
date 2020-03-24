@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,23 +30,57 @@ namespace InterCareBackend.Models
 
         public User getUserByName(String name)
         {
+
             // Query searches for any record with
             filter = Builders<BsonDocument>.Filter.Eq("Name", name);
-            collection.Find(filter).FirstOrDefault().ToString();
-            ProjectionDefinition<BsonDocument>  projectionName = Builders<BsonDocument>.Projection.Include("Name").Exclude("_id");
-            ProjectionDefinition<BsonDocument> projectionPassword = Builders<BsonDocument>.Projection.Include("Password").Exclude("_id");
-            ProjectionDefinition<BsonDocument> projectionEmail = Builders<BsonDocument>.Projection.Include("Email").Exclude("_id");
-            ProjectionDefinition <BsonDocument> projectionAccessLevel = Builders<BsonDocument>.Projection.Include("AccessLevel").Exclude("_id");
-            ProjectionDefinition<BsonDocument> projectionFullName = Builders<BsonDocument>.Projection.Include("FullName").Exclude("_id");
 
+            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
+            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
+            // Make a JObject from the JSON returned by MongoDB.
+            JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
 
+                
+            return new User((string) jUser["Name"], (string) jUser["Password"], (string) jUser["FullName"], (string) jUser["AccessLevel"]);
+        }
 
-            String Name = collection.Find(filter).Project(projectionName).FirstOrDefault().ToString();
-            String Password = collection.Find(filter).Project(projectionPassword).FirstOrDefault().ToString();
-            String Email = collection.Find(filter).Project(projectionEmail).FirstOrDefault().ToString();
-            String AccessLevel = collection.Find(filter).Project(projectionAccessLevel).FirstOrDefault().ToString();
-            String FullName = collection.Find(filter).Project(projectionFullName).FirstOrDefault().ToString();
-            return new User(Name, Password, FullName, AccessLevel);
+        public User getUserByEmail(String email)
+        {
+
+            // Query searches for any record with the email parameter being the entered email.
+            filter = Builders<BsonDocument>.Filter.Eq("Email", email);
+
+            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
+            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
+            // Make a JObject from the JSON returned by MongoDB.
+            JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
+
+            return new User((string)jUser["Name"], (string)jUser["Password"], (string)jUser["FullName"], (string)jUser["AccessLevel"]);
+        }
+
+        public Boolean checkLogin(String username, String password)
+        {
+            // Query searches for any record with the email parameter being the entered email(username).
+            filter = Builders<BsonDocument>.Filter.Eq("Email", username);
+
+            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
+            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
+
+            if (collection.Find(filter).Project(projectionRemoveId).FirstOrDefault() != null)
+            {
+                // Make a JObject from the JSON returned by MongoDB.
+                JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
+            // Checks if the entered username and password fits the user from the database.
+            if (username == (string)jUser["Email"] && password == (string)jUser["Password"])
+            {
+                return true;
+            }
+            else
+            {
+                //   System.Diagnostics.Debug.WriteLine(Email + " : " + username + " - " +  password + " : " + Password);
+                return false;
+            }
+        }
+            return false;
         }
 
 

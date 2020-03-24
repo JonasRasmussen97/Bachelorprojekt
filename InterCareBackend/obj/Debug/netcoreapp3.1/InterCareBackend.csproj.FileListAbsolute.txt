@@ -113,4 +113,11 @@ C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netco
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\SharpCompress.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.MvcApplicationPartsAssemblyInfo.cache
