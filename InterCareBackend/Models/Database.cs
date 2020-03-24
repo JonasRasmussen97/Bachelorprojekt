@@ -70,6 +70,16 @@ namespace InterCareBackend.Models
             collection.InsertOne(document);
         }
 
+        // Takes the name of the location and the field we want to update, and the value we want to update it with.
+        public void updateLocation(String locationName, String updateField, String updateValue)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Name", locationName);
+            var update = Builders<BsonDocument>.Update.Set(updateField, updateValue);
+            var result = collection.UpdateOne(filter, update);
+        }
+
+     
+
 
 
 

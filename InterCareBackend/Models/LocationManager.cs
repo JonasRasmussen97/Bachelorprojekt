@@ -12,6 +12,14 @@ namespace InterCareBackend.Models
         public string FullName { get; set; }
         public string AccessLevel { get; set; }
 
+
+        public LocationManager(String Email, String Password, String FullName, String AccessLevel)
+        {
+            this.Email = Email;
+            this.Password = Password;
+            this.FullName = FullName;
+            this.AccessLevel = AccessLevel;
+        }
         public void Login()
         {
             throw new NotImplementedException();

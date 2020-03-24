@@ -44,5 +44,12 @@ namespace InterCareBackend.Controllers
             db.createLocation(Request.Form["name"], Request.Form["address"], Request.Form["postalcode"], Request.Form["country"], Request.Form["manager"]);
         }
 
+        [HttpPut("/api/updateLocation")]
+        public void updateLocation()
+        {
+            db.setCollection("locations");
+            db.updateLocation(Request.Form["locationName"], Request.Form["updateField"], Request.Form["updateValue"]);
+        }
+
     }
 }
