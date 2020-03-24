@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Daos.Interfaces
 {
-    public interface IOrganizationAdmin
+    public interface IOrganizationAdminDao
     {
-
-
 
     }
 }

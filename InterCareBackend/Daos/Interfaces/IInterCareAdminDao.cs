@@ -7,6 +7,6 @@ namespace InterCareBackend.Daos.Interfaces
 {
     interface IInterCareAdminDao
     {
-        Task<InterCareAdmin> GetFromEmail(string email);
+    
     }
 }

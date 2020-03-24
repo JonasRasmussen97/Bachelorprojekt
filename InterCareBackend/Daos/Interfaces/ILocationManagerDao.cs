@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Daos.Interfaces
 {
-    interface ILocationManager
+    interface ILocationManagerDao
     {
     }
 }
