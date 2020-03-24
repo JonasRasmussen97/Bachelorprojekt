@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Daos\Implementations\" />
-    <Folder Include="Daos\Interfaces\" />
     <Folder Include="Dtos\" />
   </ItemGroup>
 

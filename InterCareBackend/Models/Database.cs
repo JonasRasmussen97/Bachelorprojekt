@@ -82,9 +82,6 @@ namespace InterCareBackend.Models
 
 
 
-
-
-
         public Boolean checkLogin(String username, String password)
         {
             // Query searches for any record with the email parameter being the entered email(username).
@@ -111,10 +108,14 @@ namespace InterCareBackend.Models
             return false;
         }
 
+        public void removeUserByEmail(String email)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
+            collection.DeleteOne(filter);
+        }
 
-   
 
-}
+    }
 
 
 }
