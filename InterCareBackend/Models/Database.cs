@@ -82,10 +82,10 @@ namespace InterCareBackend.Models
             setCollection("users");
             var user = getUserByEmail(email);
             setCollection("clients");
-            filter = Builders<BsonDocument>.Filter.Eq("_id", "ObjectId(" + user.id + ")");
+            filter = Builders<BsonDocument>.Filter.Eq("userId", user.id);
             var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
             System.Diagnostics.Debug.WriteLine(client.ToString());
-            return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["gender"].ToString(), client["age"].ToString());
+            return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["Gender"].ToString(), client["Age"].ToString());
         }
 
 
@@ -135,8 +135,6 @@ namespace InterCareBackend.Models
             var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             collection.DeleteOne(filter);
         }
-
-
 
 
         // LOGIN OPERATIONS
