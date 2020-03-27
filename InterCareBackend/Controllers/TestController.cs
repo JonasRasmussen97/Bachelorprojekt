@@ -19,7 +19,7 @@ namespace InterCareBackend.Controllers
         public String Get()
         {
             db.setCollection("users");
-            return db.getUserByEmail("BOB@hotmailssssd.dk")
+            return db.getUserByEmail("BOB@hotmail.dk").FullName;
         }
 
         [HttpPost("/api/login")]
