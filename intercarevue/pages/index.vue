@@ -1,108 +1,72 @@
 <template>
-  <div class="html">
-    <div class="container">
-      <div class="row justify-content-end">
-        <div class="col-4">
-          <div class="logo">InterCare</div>
-        </div>
-        <div class="col-8">
-          <Navbar></Navbar>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 text-center">
-          <div class="welcomeText">Welcome back!</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <LoginForm></LoginForm>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <section>
-            <h1>GET API Result Index</h1>
-            <div>
-              <button v-on:click="asyncData">Greet</button>
-            </div>
-          </section>
-        </div>
+  <div class="container">
+    <div>
+      <logo />
+      <h1 class="title">
+        intercarevue
+      </h1>
+      <h2 class="subtitle">
+        My rad Nuxt.js project
+      </h2>
+      <div class="links">
+        <a
+          href="https://nuxtjs.org/"
+          target="_blank"
+          class="button--green"
+        >
+          Documentation
+        </a>
+        <a
+          href="https://github.com/nuxt/nuxt.js"
+          target="_blank"
+          class="button--grey"
+        >
+          GitHub
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from "~/components/Navbar";
-import LoginForm from "~/components/LoginForm";
-import Footer from "~/components/Footer";
-import axios from "axios";
+import Logo from '~/components/Logo.vue'
+
 export default {
   components: {
-    Navbar,
-    LoginForm,
-    Footer
-  },
-  methods: {
-    async asyncData() {
-      // Working PUT REQUEST.
-      var myHeaders = new Headers();
-
-      var formdata = new FormData();
-      formdata.append("email", "JonasBig");
-      formdata.append("fullName", "Big bananaman");
-      formdata.append("password", "dirtydirty");
-      formdata.append("accessLevel", "0");
-      formdata.append("gender", "Male");
-      formdata.append("age", "2000");
-
-      var requestOptions = {
-        method: "PUT",
-        headers: myHeaders,
-        body: formdata,
-        redirect: "follow"
-      };
-
-      fetch("http://localhost:55246/api/createClient", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    },
-    async getUser() {
-      const url = "http://localhost:55246/api/";
-      axios({
-        method: "get",
-        url: url
-      }).then(data => (this.data = data));
-      return { articles: data };
-    }
+    Logo
   }
-};
+}
 </script>
 
 <style>
-.logo {
-  font-size: 45px;
-  font-weight: 400;
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.welcomeText {
-  font-size: 55px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  color: rgb(40, 109, 211);
-  margin-top: 150px;
+.title {
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
 }
 
-.html {
-  /* The image used */
-  background-image: url("https://www.ecopetit.cat/wpic/mpic/8-85314_minimalist-macbook-wallpaper-hd.jpg");
-  /* Center and scale the image nicely */
-  /* Full height */
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
 }
 </style>
