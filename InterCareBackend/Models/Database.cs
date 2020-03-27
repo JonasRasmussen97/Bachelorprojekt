@@ -35,7 +35,6 @@ namespace InterCareBackend.Models
             collection = database.GetCollection<BsonDocument>(collectionName);
         }
 
-
         // USER OPERATIONS
 
         // DENNE METODE ER DEN NYESTE OG DE ANDRE SKAL OPDATERES TIL OGSÅ AT BRUGE BSONSERIALIZER.
@@ -49,7 +48,6 @@ namespace InterCareBackend.Models
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
                 var user = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
-
                 return new User(user["_id"].ToString(), user["Email"].ToString(), user["Password"].ToString(), user["FullName"].ToString(), user["AccessLevel"].ToString());
             }
             else
@@ -63,8 +61,6 @@ namespace InterCareBackend.Models
             var filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             collection.DeleteOne(filter);
         }
-
-
 
         // CLIENT OPERATIONS
         public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
@@ -127,7 +123,6 @@ namespace InterCareBackend.Models
             var userFilter = Builders<BsonDocument>.Filter.Eq("Email", email);
             setCollection("users");
             collection.DeleteOne(userFilter);
-
         }
 
 
@@ -210,7 +205,7 @@ namespace InterCareBackend.Models
         }
 
         // SKAL TESTES!!!
-        public Organization getOrganization(String name)
+      /*  public Organization getOrganization(String name)
         {
             // Query searches for any record with the name parameter being the entered name.
             setCollection("organizations");
@@ -228,7 +223,8 @@ namespace InterCareBackend.Models
             {
                 return null;
             }
-        }
+        } 
+        */
 
         public void updateOrganizationLocations()
         {
