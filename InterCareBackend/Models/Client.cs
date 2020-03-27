@@ -5,29 +5,16 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
-    public class Client : IUser
+    public class Client : User, IUser
     {
-        public String id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
-        public string AccessLevel { get; set; }
         public string Gender { get; set; }
         public string Age { get; set; }
 
-    
 
-        public Client(string id, string email, string password, string fullName, string accessLevel, string gender, string age)
+        public Client(string id, string Email, string Password, string FullName, string AccessLevel, string Gender, string Age) : base(id, Email, Password, FullName, AccessLevel)
         {
-            this.id = id;
-            Email = email;
-            Password = password;
-            FullName = fullName;
-            AccessLevel = accessLevel;
-            Gender = gender;
-            Age = age;
-            // Defines the access level of a client upon instantiation of object. 
-            AccessLevel = "0";
+            this.Gender = Gender;
+            this.Age = Age;
         }
 
         public void Login()

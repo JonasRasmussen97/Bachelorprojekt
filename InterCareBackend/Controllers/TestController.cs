@@ -49,7 +49,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpGet("/api/getClientFromUser")]
-        public Client getClientFromUser()
+        public Models.DnsClient getClientFromUser()
         {
             return db.getClientFromUser(Request.Form["Email"]);
         }

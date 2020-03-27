@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
-    public class OrganizationAdmin : IUser
+    public class OrganizationAdmin : User, IUser
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
-        public string AccessLevel { get; set; }
+        public String OrganizationId { get; set; }
+        
+        
+        public OrganizationAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string OrganizationId) : base(id, Email, Password, FullName, AccessLevel)
+        {
+            this.OrganizationId = OrganizationId;
+
+        }
+        
 
         public void Login()
         {

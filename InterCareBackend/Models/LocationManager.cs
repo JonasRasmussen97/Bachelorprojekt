@@ -5,21 +5,19 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
-    public class LocationManager : IUser
+    public class LocationManager : User, IUser
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
-        public string AccessLevel { get; set; }
 
+        public string OrganizationId { get; set; }
+        public string LocationId { get; set; }
 
-        public LocationManager(String Email, String Password, String FullName, String AccessLevel)
+        public LocationManager(string id, string Email, string Password, string FullName, string AccessLevel, string organizationId, string locationId) : base(id, Email, Password, FullName, AccessLevel)
         {
-            this.Email = Email;
-            this.Password = Password;
-            this.FullName = FullName;
-            this.AccessLevel = AccessLevel;
+
+            this.OrganizationId = organizationId;
+            this.LocationId = locationId;
         }
+
         public void Login()
         {
             throw new NotImplementedException();
