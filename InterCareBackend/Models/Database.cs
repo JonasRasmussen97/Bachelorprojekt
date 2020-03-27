@@ -43,10 +43,16 @@ namespace InterCareBackend.Models
             setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
 
-            // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
-            var user = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
+            if (collection.Find(filter).FirstOrDefault() != null)
+            {
+                // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
+                var user = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
 
-          return new User(user["_id"].ToString(), user["Email"].ToString(), user["Password"].ToString(), user["FullName"].ToString(), user["AccessLevel"].ToString());
+                return new User(user["_id"].ToString(), user["Email"].ToString(), user["Password"].ToString(), user["FullName"].ToString(), user["AccessLevel"].ToString());
+            } else
+            {
+                return null;
+            }
         }
 
         public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
@@ -78,14 +84,25 @@ namespace InterCareBackend.Models
 
         public Client getClientFromUser(String email)
         {
+
+
             // Query searches for any record with the email parameter being the entered email.
             setCollection("users");
             var user = getUserByEmail(email);
             setCollection("clients");
-            filter = Builders<BsonDocument>.Filter.Eq("userId", user.id);
-            var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
-            System.Diagnostics.Debug.WriteLine(client.ToString());
-            return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["Gender"].ToString(), client["Age"].ToString());
+            if (user != null)
+            {
+                filter = Builders<BsonDocument>.Filter.Eq("userId", user.id);
+            }
+            if (collection.Find(filter).FirstOrDefault() != null)
+            {
+                var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).First().ToJson());
+                System.Diagnostics.Debug.WriteLine(client.ToString());
+                return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["Gender"].ToString(), client["Age"].ToString());
+            } else
+            {
+                return null;
+            }
         }
 
 
