@@ -14,7 +14,16 @@ namespace InterCareBackend.Controllers
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         
- 
+        //LOGIN OPERATIONS
+        [HttpPost("/api/login")]
+        public IActionResult login()
+        {
+            var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
+            return Ok(new { token = tokenString });
+        }
+       
+        
+        // USER OPERATIONS
         [HttpGet("/api/")]
         public String Get()
         {
@@ -22,15 +31,41 @@ namespace InterCareBackend.Controllers
             return db.getUserByEmail("BOB@hotmail.dk").FullName;
         }
 
-        [HttpPost("/api/login")]
-       public IActionResult login()
+        [HttpDelete("/api/deleteUser")]
+        public void deleteUser()
         {
-            var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
-            return Ok(new { token = tokenString });
+            db.setCollection("users");
+            db.deleteUserByEmail(Request.Form["email"]);
         }
 
+
+
+        // CLIENT OPERATIONS
+        [HttpPut("/api/createClient")]
+        public void createClient()
+        {
+            db.createClient(Request.Form["email"], Request.Form["fullName"], Request.Form["password"], Request.Form["accessLevel"], Request.Form["gender"], Request.Form["age"]);
+        }
+
+
+        [HttpGet("/api/getClientFromUser")]
+        public Client getClientFromUser()
+        {
+            return db.getClientFromUser(Request.Form["Email"]);
+        }
+
+        [HttpDelete("/api/deleteClient")]
+        public void deleteClient()
+        {
+
+            db.deleteClient(Request.Form["email"]);
+        }
+
+
+
+        // LOCATION OPERATIONS
         [HttpPost("/api/createLocation")]
-            public void createLocation()
+        public void createLocation()
         {
             db.setCollection("locations");
             db.createLocation(Request.Form["name"], Request.Form["address"], Request.Form["postalcode"], Request.Form["country"], Request.Form["manager"]);
@@ -44,36 +79,46 @@ namespace InterCareBackend.Controllers
         }
 
         [HttpDelete("/api/removeLocation")]
-        public void removeLocation(String name)
+        public void deleteLocation(String name)
         {
             // 1. Remove location 2. Remove location manager from 'location_managers' collection 3. Remove connected user profile from 'users' collection. 
             db.setCollection("locations");
-            db.removeLocationByName(name);
+            db.deleteLocationByName(name);
             db.setCollection("location_managers");
-            db.removeLocationManagerByName("");
+            db.deleteLocationManagerByName("");
             db.setCollection("users");
-            db.removeUserByEmail("");
+            db.deleteUserByEmail("");
         }
 
-        [HttpPut("/api/createClient")]
-        public void createClient()
+
+        // LOCATIONMANAGER OPERATIONS
+
+
+
+
+        // ORGANIZATION OPERATIONS
+
+        [HttpPut("api/createOrganization")]
+        public void createOrganization()
         {
-            db.createClient(Request.Form["email"], Request.Form["fullName"], Request.Form["password"], Request.Form["accessLevel"], Request.Form["gender"], Request.Form["age"]);
+            db.setCollection("organizations");
+            db.createOrganization(Request.Form["name"]);
         }
 
 
-        [HttpDelete("/api/deleteUser")]
-        public void deleteUser()
+        [HttpDelete("api/deleteOrganization")]
+        public void deleteOrganization()
         {
-            db.setCollection("users");
-            db.removeUserByEmail(Request.Form["email"]);
+            db.setCollection("organizations");
+            db.deleteOrganizationByName(Request.Form["name"]);
         }
 
-        [HttpGet("/api/getClientFromUser")]
-        public Client getClientFromUser()
-        {
-            return db.getClientFromUser(Request.Form["Email"]);
-        }
+
+        //ORGANIZATIONADMIN OPERATIONS
+        
+
+
+
 
     }
 }

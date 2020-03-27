@@ -26,5 +26,8 @@ namespace InterCareBackend.Models
             this.Managers = Managers;
         }
 
+        public Location()
+        {
+        }
     }
 }
