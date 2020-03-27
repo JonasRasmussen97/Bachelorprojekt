@@ -94,7 +94,7 @@ namespace InterCareBackend.Models
         }
 
 
-        public DnsClient getClientFromUser(String email)
+        public Client getClientFromUser(String email)
         {
 
             // Query searches for any record with the email parameter being the entered email.
@@ -109,7 +109,7 @@ namespace InterCareBackend.Models
             {
                 var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).First().ToJson());
                 System.Diagnostics.Debug.WriteLine(client.ToString());
-                return new DnsClient(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["Gender"].ToString(), client["Age"].ToString());
+                return new Client(client["_id"].ToString(), user.Email, user.Password, user.FullName, user.AccessLevel, client["Gender"].ToString(), client["Age"].ToString());
             }
             else
             {
