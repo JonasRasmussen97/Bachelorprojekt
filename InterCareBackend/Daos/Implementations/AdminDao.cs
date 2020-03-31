@@ -27,15 +27,15 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public Client getClientByEmail(String email)
+        public OrganizationAdmin getAdminByEmail(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             if (db.getCollection().Find(filter).FirstOrDefault() != null)
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
-                var client = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                return new Client(client["_id"].ToString(), client["Email"].ToString(), client["Password"].ToString(), client["Fullname"].ToString(), client["Accesslevel"].ToString(), client["Gender"].ToString(), client["Age"].ToString(), client["Type"].ToString());
+                var admin = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
+                return new OrganizationAdmin(admin["_id"].ToString(), admin["Email"].ToString(), admin["Password"].ToString(), admin["Fullname"].ToString(), admin["Accesslevel"].ToString(), admin["Type"].ToString());
             }
             else
             {
@@ -53,7 +53,7 @@ namespace InterCareBackend.Daos.Implementations
        
         }
 
-        public void createAdmin(string email, string fullName, string password, string accessLevel, string gender, string age)
+        public void createAdmin(string email, string fullName, string password, string accessLevel, string gender, string age, string type)
         {
             db.setCollection("users");
             var userDocument = new BsonDocument
@@ -61,10 +61,9 @@ namespace InterCareBackend.Daos.Implementations
                 { "Email", email },
                 { "FullName", fullName },
                 { "Password", password},
-                { "AccessLevel", accessLevel },
-                { "Gender", gender },
-                { "Age", age }
+                { "AccessLevel", accessLevel }
             };
+            
             db.getCollection().InsertOne(userDocument);
         }
 

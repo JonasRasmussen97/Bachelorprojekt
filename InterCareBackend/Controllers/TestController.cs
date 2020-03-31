@@ -27,7 +27,7 @@ namespace InterCareBackend.Controllers
             return Ok(new { token = tokenString });
         }
        */
-        
+
         // USER OPERATIONS
         [HttpGet("/api/")]
         public Client Get()

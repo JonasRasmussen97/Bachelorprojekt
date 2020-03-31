@@ -56,7 +56,7 @@ namespace InterCareBackend.Daos.Implementations
  
         }
 
-        public List<Location> getLocationsFromOrganization(string name)
+        public List<Location> getLocationsFromOrganization(string name) 
         {
                 db.setCollection("organizations");
                 filter = Builders<BsonDocument>.Filter.Eq("Name", name);
