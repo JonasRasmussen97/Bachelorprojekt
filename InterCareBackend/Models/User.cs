@@ -27,6 +27,15 @@ namespace InterCareBackend.Models
             this.AccessLevel = AccessLevel;
             this.Type = Type;
         }
+
+        public User(string Email, string Password, String FullName, String AccessLevel, String Type)
+        {
+            this.Email = Email;
+            this.Password = Password;
+            this.FullName = FullName;
+            this.AccessLevel = AccessLevel;
+            this.Type = Type;
+        }
         public void Login()
         {
             // To be implemented.

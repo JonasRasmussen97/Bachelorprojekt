@@ -35,7 +35,7 @@ namespace InterCareBackend.Daos.Implementations
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
                 var admin = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                return new OrganizationAdmin(admin["_id"].ToString(), admin["Email"].ToString(), admin["Password"].ToString(), admin["Fullname"].ToString(), admin["Accesslevel"].ToString(), admin["Type"].ToString());
+                return new OrganizationAdmin(admin["_id"].ToString(), admin["Email"].ToString(), admin["Password"].ToString(), admin["FullName"].ToString(), admin["AccessLevel"].ToString(), admin["Type"].ToString());
             }
             else
             {

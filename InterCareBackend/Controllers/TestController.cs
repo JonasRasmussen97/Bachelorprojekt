@@ -16,6 +16,7 @@ namespace InterCareBackend.Controllers
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         ClientDao dao = new ClientDao();
+        AdminDao dao3 = new AdminDao();
         OrganizationDao organizationDao = new OrganizationDao();
         
         /*
@@ -30,9 +31,9 @@ namespace InterCareBackend.Controllers
 
         // USER OPERATIONS
         [HttpGet("/api/")]
-        public Client Get()
+        public OrganizationAdmin Get()
         {
-            return dao.getClientByEmail("Jonar17@student.sdu.dk");
+            return dao3.getAdminByEmail("bob@bob.dk");
         }
 
         /*

@@ -14,7 +14,7 @@ namespace InterCareBackend.Models
         {
 
         }
-        public OrganizationAdmin(string Email, string Password, string FullName, string AccessLevel, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
+        public OrganizationAdmin(string Email, string Password, string FullName, string AccessLevel, string Type) : base(Email, Password, FullName, AccessLevel, Type)
         {
 
         }
