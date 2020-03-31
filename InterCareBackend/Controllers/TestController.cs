@@ -126,5 +126,12 @@ namespace InterCareBackend.Controllers
         {
             organizationDao.createOrganization("Apple", new List<string> { "Odense", "Aarhus" }, "BobId");
         }
+
+
+        [HttpGet("/api/getOrganization")]
+        public Organization getOrganization()
+        {
+            return organizationDao.getOrganization(Request.Form["Name"]);
+        }
     }
 }

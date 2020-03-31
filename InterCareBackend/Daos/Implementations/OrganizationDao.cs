@@ -42,6 +42,30 @@ namespace InterCareBackend.Daos.Implementations
             collection.InsertOne(doc);
         }
 
+        public Organization getOrganization(String name)
+        {
+            // Query searches for any record with the name parameter being the entered name.
+            db.setCollection("organizations");
+
+            filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+
+            if (db.getCollection().Find(filter).FirstOrDefault() != null)
+            {
+                // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
+                var organization = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
+
+                List<string> locations = BsonSerializer.Deserialize<List<string>>(organization["Locations"].ToJson());
+
+
+                return new Organization(organization["_id"].ToString(), organization["Name"].ToString(), locations, organization["AdminId"].ToString());
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
 
     }
 }
