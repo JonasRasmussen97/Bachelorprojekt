@@ -15,15 +15,17 @@ namespace InterCareBackend.Models
         public String Password { get; set; }
         public String FullName { get; set;}
         public String AccessLevel { get; set; }
+        public String Type { get; set; }
         
 
-        public User(String id, string Email, string Password, String FullName, String AccessLevel)
+        public User(String id, string Email, string Password, String FullName, String AccessLevel, String Type)
         {
             this.id = id;
             this.Email = Email;
             this.Password = Password;
             this.FullName = FullName;
             this.AccessLevel = AccessLevel;
+            this.Type = Type;
         }
         public void Login()
         {

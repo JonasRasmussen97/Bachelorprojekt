@@ -35,7 +35,7 @@ namespace InterCareBackend.Daos.Implementations
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
                 var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
-                return new Client(client["Email"], client["Password"], client["Type"], client["Fullname"], client["Accesslevel"], client["Gender"], client["Age"]));
+                return new Client(client["_id"].ToString(), client["Email"].ToString(), client["Password"].ToString(), client["Fullname"].ToString(), client["Accesslevel"].ToString(), client["Gender"].ToString(), client["Age"].ToString(), client["Type"].ToString());
             }
             else
             {
@@ -44,6 +44,4 @@ namespace InterCareBackend.Daos.Implementations
         }
 
     }
-
     }
-}

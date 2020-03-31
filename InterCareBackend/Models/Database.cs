@@ -40,6 +40,7 @@ namespace InterCareBackend.Models
             return collection;
         }
 
+        /*
         // USER OPERATIONS
 
         // DENNE METODE ER DEN NYESTE OG DE ANDRE SKAL OPDATERES TIL OGSÅ AT BRUGE BSONSERIALIZER.
@@ -229,7 +230,7 @@ namespace InterCareBackend.Models
                 return null;
             }
         } 
-        */
+        
 
         public void updateOrganizationLocations()
         {
@@ -269,7 +270,7 @@ namespace InterCareBackend.Models
             return false;
         }
 
-
+    */
 
 
     }

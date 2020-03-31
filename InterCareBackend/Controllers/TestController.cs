@@ -1,4 +1,5 @@
 ﻿
+using InterCareBackend.Daos.Implementations;
 using InterCareBackend.Helpers;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,9 @@ namespace InterCareBackend.Controllers
     {
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
+        ClientDao dao = new ClientDao();
         
+        /*
         //LOGIN OPERATIONS
         [HttpPost("/api/login")]
         public IActionResult login()
@@ -21,16 +24,16 @@ namespace InterCareBackend.Controllers
             var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
             return Ok(new { token = tokenString });
         }
-       
+       */
         
         // USER OPERATIONS
         [HttpGet("/api/")]
-        public String Get()
+        public Client Get()
         {
-            db.setCollection("users");
-            return db.getUserByEmail("BOB@hotmail.dk").FullName;
+            return dao.getClientByEmail("Jonar17@student.sdu.dk");
         }
 
+        /*
         [HttpDelete("/api/deleteUser")]
         public void deleteUser()
         {
@@ -119,6 +122,6 @@ namespace InterCareBackend.Controllers
 
 
 
-
+    */
     }
 }

@@ -12,6 +12,7 @@ namespace InterCareBackend.Models
         String Password { get; set; }
         String FullName { get; set; }
         String AccessLevel { get; set; }
+        String Type { get; set; }
 
         void Login();
         void Logout(); 

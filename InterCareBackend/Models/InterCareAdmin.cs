@@ -11,6 +11,7 @@ namespace InterCareBackend.Models
         public string Password { get; set; }
         public string FullName { get; set; }
         public string AccessLevel { get; set; }
+        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Login()
         {

@@ -11,7 +11,7 @@ namespace InterCareBackend.Models
         public string Age { get; set; }
 
 
-        public Client(string id, string Email, string Password, string FullName, string AccessLevel, string Gender, string Age) : base(id, Email, Password, FullName, AccessLevel)
+        public Client(string id, string Email, string Password, string FullName, string AccessLevel, string Gender, string Age, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
         {
             this.Gender = Gender;
             this.Age = Age;

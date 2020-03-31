@@ -11,7 +11,7 @@ namespace InterCareBackend.Models
         public String OrganizationId { get; set; }
         
         
-        public OrganizationAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string OrganizationId) : base(id, Email, Password, FullName, AccessLevel)
+        public OrganizationAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string OrganizationId, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
         {
             this.OrganizationId = OrganizationId;
 

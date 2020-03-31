@@ -10,8 +10,9 @@ namespace InterCareBackend.Models
 
         public string OrganizationId { get; set; }
         public string LocationId { get; set; }
+  
 
-        public LocationManager(string id, string Email, string Password, string FullName, string AccessLevel, string organizationId, string locationId) : base(id, Email, Password, FullName, AccessLevel)
+        public LocationManager(string id, string Email, string Password, string FullName, string AccessLevel, string organizationId, string locationId, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
         {
 
             this.OrganizationId = organizationId;
