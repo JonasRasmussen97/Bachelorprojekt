@@ -61,7 +61,8 @@ namespace InterCareBackend.Daos.Implementations
                 { "Email", email },
                 { "FullName", fullName },
                 { "Password", password},
-                { "AccessLevel", accessLevel }
+                { "AccessLevel", accessLevel },
+                {"Type", type }
             };
             
             db.getCollection().InsertOne(userDocument);

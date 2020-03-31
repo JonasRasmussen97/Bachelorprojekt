@@ -31,9 +31,10 @@ namespace InterCareBackend.Controllers
 
         // USER OPERATIONS
         [HttpGet("/api/")]
-        public OrganizationAdmin Get()
+        public void Get()
         {
-            return dao3.getAdminByEmail("bob@bob.dk");
+            dao3.createAdmin("Jonar17@student.sdu.dk", "Jonas Støve Rasmussen", "Pass", "0", "Male", "23", "Admin");
+            organizationDao.createOrganization("Jonas's Organization", new List<String> { }, dao3.getAdminByEmail("Jonar17@student.sdu.dk").id);
         }
 
         /*
