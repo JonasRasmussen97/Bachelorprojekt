@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {}
+    "C:\\Users\\finch\\Github\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {
+    "C:\\Users\\finch\\Github\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
+        "projectUniqueName": "C:\\Users\\finch\\Github\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
         "projectName": "InterCareBackend",
-        "projectPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
-        "packagesPath": "C:\\Users\\SaltO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SaltO\\Documents\\GitHub\\Bachelorprojekt\\InterCareBackend\\obj\\",
+        "projectPath": "C:\\Users\\finch\\Github\\Bachelorprojekt\\InterCareBackend\\InterCareBackend.csproj",
+        "packagesPath": "C:\\Users\\finch\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\finch\\Github\\Bachelorprojekt\\InterCareBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SaltO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\finch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EO.Pdf": {
+              "target": "Package",
+              "version": "[20.0.81, )"
+            },
             "JWT": {
               "target": "Package",
               "version": "[6.1.0, )"
@@ -61,9 +65,17 @@
               "target": "Package",
               "version": "[2.10.2, )"
             },
+            "NHibernate": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
+            },
+            "Sitecore.FakeDb": {
+              "target": "Package",
+              "version": "[2.0.1, )"
             }
           },
           "imports": [
@@ -84,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

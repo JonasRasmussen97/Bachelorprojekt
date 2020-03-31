@@ -10,15 +10,15 @@ namespace InterCareBackend.Models
 
         public String id { get; set; }
         public String Name { get; set; }
-        public Dictionary<String, Location> Locations { get; set; }
-        public OrganizationAdmin Admin { get; set; }
+        public List<String> Locations { get; set; }
+        public String AdminId { get; set; }
 
-        public Organization(string id, string name, Dictionary<string, Location> locations, OrganizationAdmin admin)
+        public Organization(string id, string name, List<String> locations, string adminId)
         {
             this.id = id;
             Name = name;
             Locations = locations;
-            Admin = admin;
+            AdminId = adminId;
         }
     }
 

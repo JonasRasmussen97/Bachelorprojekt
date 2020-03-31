@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Extensions.Primitives;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
@@ -39,6 +40,7 @@ namespace InterCareBackend.Models
         {
             return collection;
         }
+
 
         /*
         // USER OPERATIONS

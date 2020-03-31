@@ -5,6 +5,7 @@ using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 using System;
+using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
 {
@@ -15,6 +16,7 @@ namespace InterCareBackend.Controllers
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         ClientDao dao = new ClientDao();
+        OrganizationDao organizationDao = new OrganizationDao();
         
         /*
         //LOGIN OPERATIONS
@@ -99,14 +101,7 @@ namespace InterCareBackend.Controllers
 
 
 
-        // ORGANIZATION OPERATIONS
-
-        [HttpPut("api/createOrganization")]
-        public void createOrganization()
-        {
-            db.setCollection("organizations");
-            db.createOrganization(Request.Form["name"]);
-        }
+        
 
 
         [HttpDelete("api/deleteOrganization")]
@@ -123,5 +118,13 @@ namespace InterCareBackend.Controllers
 
 
     */
+    
+            // ORGANIZATION OPERATIONS
+
+        [HttpPut("/api/createOrganization")]
+        public void createOrganization()
+        {
+            organizationDao.createOrganization("Apple", new List<string> { "Odense", "Aarhus" }, "BobId");
+        }
     }
 }
