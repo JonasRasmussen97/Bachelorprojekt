@@ -8,12 +8,10 @@ namespace InterCareBackend.Models
 {
     public class OrganizationAdmin : User, IUser
     {
-        public String OrganizationId { get; set; }
         
         
-        public OrganizationAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string OrganizationId, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
+        public OrganizationAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
         {
-            this.OrganizationId = OrganizationId;
 
         }
         
