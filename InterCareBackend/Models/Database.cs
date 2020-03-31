@@ -35,6 +35,11 @@ namespace InterCareBackend.Models
             collection = database.GetCollection<BsonDocument>(collectionName);
         }
 
+        public IMongoCollection<BsonDocument> getCollection()
+        {
+            return collection;
+        }
+
         // USER OPERATIONS
 
         // DENNE METODE ER DEN NYESTE OG DE ANDRE SKAL OPDATERES TIL OGSÅ AT BRUGE BSONSERIALIZER.
