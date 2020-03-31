@@ -39,7 +39,7 @@ namespace InterCareBackend.Daos.Implementations
                 {"AdminId", adminId }
             };
 
-            collection.InsertOne(doc);
+            db.getCollection().InsertOne(doc);
         }
 
         public Organization getOrganization(String name)
@@ -52,7 +52,7 @@ namespace InterCareBackend.Daos.Implementations
             if (db.getCollection().Find(filter).FirstOrDefault() != null)
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
-                var organization = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
+                var organization = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
 
                 List<string> locations = BsonSerializer.Deserialize<List<string>>(organization["Locations"].ToJson());
 
