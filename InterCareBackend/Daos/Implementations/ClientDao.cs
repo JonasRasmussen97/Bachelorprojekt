@@ -17,13 +17,13 @@ namespace InterCareBackend.Daos.Implementations
         // Instantiate filter to enable filtering of results from database.
         FilterDefinition<BsonDocument> filter;
 
-        IMongoCollection<BsonDocument> collection;
+
 
 
         public ClientDao()
         {
             db = new Database("InterCare", "users");
-            collection = db.getCollection();
+   
         }
 
 
@@ -34,7 +34,7 @@ namespace InterCareBackend.Daos.Implementations
             if (db.getCollection().Find(filter).FirstOrDefault() != null)
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
-                var client = BsonSerializer.Deserialize<BsonDocument>(collection.Find(filter).FirstOrDefault().ToJson());
+                var client = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
                 return new Client(client["_id"].ToString(), client["Email"].ToString(), client["Password"].ToString(), client["Fullname"].ToString(), client["Accesslevel"].ToString(), client["Gender"].ToString(), client["Age"].ToString(), client["Type"].ToString());
             }
             else
@@ -42,6 +42,34 @@ namespace InterCareBackend.Daos.Implementations
                 return null;
             }
         }
+
+
+
+        public void deleteClient(String email)
+        {
+            db.setCollection("users");
+            filter = Builders<BsonDocument>.Filter.Eq("Email", email);
+            db.getCollection().DeleteOne(filter);
+       
+        }
+
+        public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
+        {
+            db.setCollection("users");
+            var userDocument = new BsonDocument
+            {
+                { "Email", email },
+                { "FullName", fullName },
+                { "Password", password},
+                { "AccessLevel", accessLevel },
+                { "Gender", gender },
+                { "Age", age }
+            };
+            db.getCollection().InsertOne(userDocument);
+        }
+
+
+
 
     }
     }
