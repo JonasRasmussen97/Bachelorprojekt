@@ -78,13 +78,8 @@ namespace InterCareBackend.Daos.Implementations
                         var locationObj = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
                         List<string> managersList = BsonSerializer.Deserialize<List<string>>(locationObj["Managers"].ToJson());
                     locations.Add(new Location(locationObj["_id"].ToString(), locationObj["Name"].ToString(), locationObj["Address"].ToString(), locationObj["PostalCode"].ToString(), locationObj["Country"].ToString(), locationObj["Images"].ToString(), managersList));
-
                 }
-
                     return locations;
-
-
-
                 }
                 else
                 {
@@ -95,6 +90,7 @@ namespace InterCareBackend.Daos.Implementations
         // Takes the name of the location and the field we want to update, and the value we want to update it with.
         public void updateLocation(String locationName, String updateField, String updateValue)
         {
+            db.setCollection("locations");
             var filter = Builders<BsonDocument>.Filter.Eq("Name", locationName);
             var update = Builders<BsonDocument>.Update.Set(updateField, updateValue);
             var result = db.getCollection().UpdateOne(filter, update);
@@ -103,6 +99,7 @@ namespace InterCareBackend.Daos.Implementations
         // Also removes the connected location manager because he cannot exist without a location.
         public void deleteLocationByName(String name)
         {
+            db.setCollection("locations");
             var filter = Builders<BsonDocument>.Filter.Eq("Name", name);
             db.getCollection().DeleteOne(filter);
         }
