@@ -41,10 +41,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "EO.Pdf": {
-              "target": "Package",
-              "version": "[20.0.81, )"
-            },
             "JWT": {
               "target": "Package",
               "version": "[6.1.0, )"
@@ -72,10 +68,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
-            },
-            "Sitecore.FakeDb": {
-              "target": "Package",
-              "version": "[2.0.1, )"
             }
           },
           "imports": [

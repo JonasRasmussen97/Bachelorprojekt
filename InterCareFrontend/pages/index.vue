@@ -25,7 +25,7 @@
           <section>
             <h1>GET API Result Index</h1>
             <div>
-              <button v-on:click="asyncData">Greet</button>
+              <button v-on:click="doSomethingWithJWT">{resp}</button>
             </div>
           </section>
         </div>
@@ -46,43 +46,38 @@ import LoginForm from "~/components/LoginForm";
 import Footer from "~/components/Footer";
 import axios from "axios";
 export default {
+  resp: "Fetch",
   components: {
     Navbar,
     LoginForm,
     Footer
   },
   methods: {
-    async asyncData() {
-      // Working PUT REQUEST.
-      var myHeaders = new Headers();
-      var formdata = new FormData();
-      formdata.append("email", "JonasBig");
-      formdata.append("fullName", "Big bananaman");
-      formdata.append("password", "dirtydirty");
-      formdata.append("accessLevel", "0");
-      formdata.append("gender", "Male");
-      formdata.append("age", "2000");
-      var requestOptions = {
-        method: "PUT",
-        headers: myHeaders,
-        body: formdata,
-        redirect: "follow"
-      };
-      fetch("http://localhost:55246/api/createClient", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
+    async fetchJWT() {
+      // Error handling and such omitted here for simplicity.
+      const res = await fetch(`http://localhost:55246/api/login/`);
+      this.jwt = await res.text();
     },
-    async getUser() {
-      const url = "http://localhost:55246/api/";
-      axios({
-        method: "get",
-        url: url
-      }).then(data => (this.data = data));
-      return { articles: data };
-    }
-  }
+     async doSomethingWithJWT() {
+     var myHeaders = new Headers();
+     myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODU5MTcyNjIsInVzZXJuYW1lIjoiVGhvbWFzIiwicGFzc3dvcmQiOiJOaWdnYSIsImFjY2Vzc0xldmVsIjoiMCJ9.XoiChMMimfM8ABYLRfGyctdipmO6GHPLuNOYs-GIBdA");
+
+    var urlencoded = new URLSearchParams();
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
 };
+
+fetch("http://localhost:55246/api/test", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  },
+}
+}
+
 </script>
 
 <style>

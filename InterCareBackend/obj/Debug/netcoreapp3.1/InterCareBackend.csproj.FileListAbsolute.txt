@@ -238,15 +238,10 @@ C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\I
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csproj.CoreCompileInputs.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Antlr3.Runtime.dll
-C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\EO.Base.dll
-C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\EO.Pdf.dll
-C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\EO.WebBrowser.dll
-C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\EO.WebEngine.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Iesi.Collections.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\NHibernate.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Remotion.Linq.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Remotion.Linq.EagerFetching.dll
-C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\Sitecore.FakeDb.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
