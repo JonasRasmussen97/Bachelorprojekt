@@ -21,6 +21,24 @@ namespace InterCareBackend.Daos.Implementations
             db = new Database("InterCare", "locations"); 
         }
 
+
+        public void createLocation(string name, string address, string postalCode, string country, string images, List<String> managers)
+        {
+            db.setCollection("locations");
+            var document = new BsonDocument {
+            {"Name", name },
+            {"Address", address },
+            {"PostalCode", postalCode },
+            {"Country", country },
+            {"Images", images },
+            {"Managers", new BsonArray(managers)}
+         };
+
+            db.getCollection().InsertOne(document);
+
+        }
+
+
         public Location getLocationById(string id)
         {
             db.setCollection("locations");
@@ -39,22 +57,7 @@ namespace InterCareBackend.Daos.Implementations
             }
         }
 
-        public void createLocation(string name, string address, string postalCode, string country, string images, List<String> managers)
-        {
-            db.setCollection("locations");
-            var document = new BsonDocument {
-            {"Name", name },
-            {"Address", address },
-            {"PostalCode", postalCode },
-            {"Country", country },
-            {"Images", images },
-            {"Managers", new BsonArray(managers)} 
-         };
-
-            db.getCollection().InsertOne(document);
- 
-        }
-
+        
         public List<Location> getLocationsFromOrganization(string name) 
         {
                 db.setCollection("organizations");
