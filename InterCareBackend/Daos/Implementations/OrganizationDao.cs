@@ -1,10 +1,8 @@
-﻿using EO.Internal;
-using InterCareBackend.Daos.Interfaces;
+﻿using InterCareBackend.Daos.Interfaces;
 using InterCareBackend.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using Sitecore.FakeDb;
 using System;
 using System.Collections.Generic;
 using System.Linq;

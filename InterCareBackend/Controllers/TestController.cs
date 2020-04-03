@@ -16,7 +16,7 @@ namespace InterCareBackend.Controllers
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         ClientDao dao = new ClientDao();
-        AdminDao dao3 = new AdminDao();
+        OrganizationAdminDao dao3 = new OrganizationAdminDao();
         OrganizationDao organizationDao = new OrganizationDao();
         
         /*
@@ -30,12 +30,7 @@ namespace InterCareBackend.Controllers
        */
 
         // USER OPERATIONS
-        [HttpGet("/api/")]
-        public void Get()
-        {
-            dao3.createAdmin("Jonar17@student.sdu.dk", "Jonas Støve Rasmussen", "Pass", "0", "Male", "23", "Admin");
-            organizationDao.createOrganization("Jonas's Organization", new List<String> { }, dao3.getAdminByEmail("Jonar17@student.sdu.dk").id);
-        }
+        
 
         /*
         [HttpDelete("/api/deleteUser")]
@@ -116,9 +111,6 @@ namespace InterCareBackend.Controllers
 
         //ORGANIZATIONADMIN OPERATIONS
         
-
-
-
     */
     
             // ORGANIZATION OPERATIONS

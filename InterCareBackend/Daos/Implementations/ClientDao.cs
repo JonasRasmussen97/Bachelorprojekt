@@ -17,13 +17,25 @@ namespace InterCareBackend.Daos.Implementations
         // Instantiate filter to enable filtering of results from database.
         FilterDefinition<BsonDocument> filter;
 
-
-
-
         public ClientDao()
         {
             db = new Database("InterCare", "users");
-   
+
+        }
+
+        public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
+        {
+            db.setCollection("users");
+            var userDocument = new BsonDocument
+            {
+                { "Email", email },
+                { "FullName", fullName },
+                { "Password", password},
+                { "AccessLevel", accessLevel },
+                { "Gender", gender },
+                { "Age", age }
+            };
+            db.getCollection().InsertOne(userDocument);
         }
 
 
@@ -44,32 +56,14 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-
         public void deleteClient(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             db.getCollection().DeleteOne(filter);
-       
-        }
 
-        public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
-        {
-            db.setCollection("users");
-            var userDocument = new BsonDocument
-            {
-                { "Email", email },
-                { "FullName", fullName },
-                { "Password", password},
-                { "AccessLevel", accessLevel },
-                { "Gender", gender },
-                { "Age", age }
-            };
-            db.getCollection().InsertOne(userDocument);
         }
 
 
-
-
     }
-    }
+}
