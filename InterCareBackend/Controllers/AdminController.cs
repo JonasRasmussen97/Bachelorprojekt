@@ -15,7 +15,7 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createAdminWithOrganization")]
         public void create()
         {
-            adminDao.createAdmin("Jonar17@student.sdu.dk", "Jonas Støve Rasmussen", "Pass", "0", "Male", "23", "Admin");
+            adminDao.createAdmin("Jonar17@student.sdu.dk", "Jonas Støve Rasmussen", "Pass", "0", "Admin");
             organizationDao.createOrganization("Jonas's Organization", new List<String> { }, adminDao.getAdminByEmail("Jonar17@student.sdu.dk").id);
         }
 

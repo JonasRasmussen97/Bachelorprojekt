@@ -1,45 +1,50 @@
-﻿using System;
-using System.Linq;
-using InterCareBackend.Models;
+﻿using InterCareBackend.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InterCareBackend.Daos.Implementations
 {
-
-    public class OrganizationAdminDao
+    public class InterCareAdminDao
     {
+
         // Instantiates the database connection. <<Database, Collection>>
         public Database db;
+
+        public ClientDao clientDao;
+
         // Instantiate filter to enable filtering of results from database.
         FilterDefinition<BsonDocument> filter;
 
-
-        public OrganizationAdminDao()
+        public InterCareAdminDao()
         {
             db = new Database("InterCare", "users");
+            clientDao = new ClientDao();
 
         }
 
 
-        public void createAdmin(string email, string fullName, string password, string accessLevel, string type)
+        public void createInterCareAdmin(string email, string password, string fullName, string accessLevel, string type)
         {
             db.setCollection("users");
-            var userDocument = new BsonDocument
+            var doc = new BsonDocument
             {
                 { "Email", email },
-                { "FullName", fullName },
                 { "Password", password},
+                { "FullName", fullName },
                 { "AccessLevel", accessLevel },
                 { "Type", type }
             };
 
-            db.getCollection().InsertOne(userDocument);
+            db.getCollection().InsertOne(doc);
         }
 
 
-        public OrganizationAdmin getAdminByEmail(String email)
+        public InterCareAdmin getInterCareAdminByEmail(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -47,7 +52,7 @@ namespace InterCareBackend.Daos.Implementations
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
                 var admin = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                return new OrganizationAdmin(admin["_id"].ToString(), admin["Email"].ToString(), admin["Password"].ToString(), admin["FullName"].ToString(), admin["AccessLevel"].ToString(), admin["Type"].ToString());
+                return new InterCareAdmin(admin["_id"].ToString(), admin["Email"].ToString(), admin["Password"].ToString(), admin["FullName"].ToString(), admin["AccessLevel"].ToString(), admin["Type"].ToString());
             }
             else
             {
@@ -56,7 +61,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void deleteAdmin(String email)
+        public void deleteInterCareAdmin(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -65,5 +70,8 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
+
     }
+
+
 }

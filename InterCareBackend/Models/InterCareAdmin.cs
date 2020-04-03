@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
-    public class InterCareAdmin : IUser
+    public class InterCareAdmin : User, IUser
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
-        public string AccessLevel { get; set; }
-        public string Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        
+        public InterCareAdmin(string id, string Email, string Password, string FullName, string AccessLevel, string Type) : base(id, Email, Password, FullName, AccessLevel, Type)
+        {
+
+        }
+        
         public void Login()
         {
             throw new NotImplementedException();
@@ -23,20 +24,6 @@ namespace InterCareBackend.Models
             throw new NotImplementedException();
         }
 
-        public Boolean removeOrganization(Organization organization)
-        {
-            return true;
-        }
-
-        public Boolean removeLocation(Location location)
-        {
-            return true;
-        }
-
-        public Boolean removeUser(IUser user)
-        {
-            return true;
-        }
 
     }
 }
