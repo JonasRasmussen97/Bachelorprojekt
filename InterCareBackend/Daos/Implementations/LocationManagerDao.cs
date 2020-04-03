@@ -20,19 +20,33 @@ namespace InterCareBackend.Daos.Implementations
         public LocationManagerDao()
         {
             db = new Database("InterCare", "users");
-   
+
+        }
+
+        public void createManager(string email, string fullName, string password, string accessLevel, string type)
+        {
+            db.setCollection("users");
+            var userDocument = new BsonDocument
+            {
+                { "Email", email },
+                { "Password", password},
+                { "FullName", fullName },
+                { "AccessLevel", accessLevel },
+                { "Type", type },
+            };
+            db.getCollection().InsertOne(userDocument);
         }
 
 
-        public Client getManagerByEmail(String email)
+        public LocationManager getLocationManagerByEmail(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             if (db.getCollection().Find(filter).FirstOrDefault() != null)
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
-                var client = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                return new Client(client["_id"].ToString(), client["Email"].ToString(), client["Password"].ToString(), client["Fullname"].ToString(), client["Accesslevel"].ToString(), client["Gender"].ToString(), client["Age"].ToString(), client["Type"].ToString());
+                var manager = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
+                return new LocationManager(manager["_id"].ToString(), manager["Email"].ToString(), manager["Password"].ToString(), manager["FullName"].ToString(), manager["AccessLevel"].ToString(), manager["Type"].ToString());
             }
             else
             {
@@ -41,32 +55,14 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-
         public void deleteManager(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             db.getCollection().DeleteOne(filter);
-       
-        }
 
-        public void createManager(string email, string fullName, string password, string accessLevel, string gender, string age)
-        {
-            db.setCollection("users");
-            var userDocument = new BsonDocument
-            {
-                { "Email", email },
-                { "FullName", fullName },
-                { "Password", password},
-                { "AccessLevel", accessLevel },
-                { "Gender", gender },
-                { "Age", age }
-            };
-            db.getCollection().InsertOne(userDocument);
         }
 
 
-
-
     }
-    }
+}
