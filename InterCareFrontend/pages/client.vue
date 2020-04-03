@@ -1,6 +1,5 @@
 <template>
 <div class="wrap">
-<div class="container-fluid">
     <div class="container">
       <div class="row justify-content-end">
         <div class="col-4">
@@ -11,45 +10,33 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 text-center">
-          <div class="welcomeText">Welcome back!</div>
+ <div class="col-12">
+   <Organizations></Organizations>
         </div>
+     <div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <LoginForm></LoginForm>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <section>
-            <h1>GET API Result Index</h1>
-            <div>
-              <button v-on:click="asyncData">Greet</button>
-            </div>
-          </section>
-        </div>
       </div>
       <div class="row">
       <div class="col">
         <Footer></Footer>
         </div>
         </div>
-    </div>
-    </div>
-    </div>
+  </div>
+  </div>
 </template>
 
 <script>
 import Navbar from "~/components/Navbar";
 import LoginForm from "~/components/LoginForm";
 import Footer from "~/components/Footer";
+import Organizations from "~/components/Organizations";
 import axios from "axios";
 export default {
   components: {
     Navbar,
     LoginForm,
-    Footer
+    Footer,
+    Organizations
   },
   methods: {
     async asyncData() {
@@ -86,24 +73,16 @@ export default {
 </script>
 
 <style>
-
 .logo {
   font-size: 45px;
   font-weight: 400;
   color: white;
 }
-.welcomeText {
-  font-size: 55px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  color: white;
-  margin-top: 90px;
-}
+
 
 .wrap{
   background-color:#3c68b9;  
   height: 55.35em; 
-}  
-
+} 
 
 </style>

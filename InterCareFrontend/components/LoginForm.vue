@@ -38,7 +38,7 @@
   padding: 35px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  margin-top: -65px;
+  margin-top: -70px;
 }
 .form input {
   font-family: "Roboto", sans-serif;
