@@ -6,7 +6,6 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Daos.Implementations
 {
@@ -17,13 +16,10 @@ namespace InterCareBackend.Daos.Implementations
         // Instantiate filter to enable filtering of results from database.
         FilterDefinition<BsonDocument> filter;
 
-        IMongoCollection<BsonDocument> collection;
-
 
         public OrganizationDao()
         {
             db = new Database("InterCare", "organizations");
-            collection = db.getCollection();
         }
 
 
@@ -39,6 +35,7 @@ namespace InterCareBackend.Daos.Implementations
 
             db.getCollection().InsertOne(doc);
         }
+
 
         public Organization getOrganization(String name)
         {
@@ -63,6 +60,15 @@ namespace InterCareBackend.Daos.Implementations
             {
                 return null;
             }
+        }
+
+
+        public void deleteOrganization(String name)
+        {
+            db.setCollection("organizations");
+            filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            db.getCollection().DeleteOne(filter);
+
         }
 
     }

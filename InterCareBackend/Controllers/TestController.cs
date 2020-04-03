@@ -115,7 +115,7 @@ namespace InterCareBackend.Controllers
     
             // ORGANIZATION OPERATIONS
 
-        [HttpPut("/api/createOrganization")]
+        /*[HttpPut("/api/createOrganization")]
         public void createOrganization()
         {
             organizationDao.createOrganization("Apple", new List<string> { "Odense", "Aarhus" }, "BobId");
@@ -126,6 +126,6 @@ namespace InterCareBackend.Controllers
         public Organization getOrganization()
         {
             return organizationDao.getOrganization(Request.Form["Name"]);
-        }
+        }*/
     }
 }
