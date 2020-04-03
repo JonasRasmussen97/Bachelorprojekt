@@ -1,6 +1,7 @@
 ﻿using InterCareBackend.Daos.Implementations;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
@@ -21,7 +22,7 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getLocationById")]
         public Location getOrganization()
         {
-            return locationDao.getLocationById("id");
+            return locationDao.getLocationById("5e79e3e908e5001d3c7e9016");
         }
 
         
