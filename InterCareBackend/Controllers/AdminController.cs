@@ -3,14 +3,11 @@ using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Controllers
 {
     public class AdminController
     {
-        Database db = new Database("InterCare", "users");
         OrganizationAdminDao adminDao = new OrganizationAdminDao();
         OrganizationDao organizationDao = new OrganizationDao();
 
@@ -23,7 +20,7 @@ namespace InterCareBackend.Controllers
         }
 
 
-        [HttpGet("api/getAdminByEmail")]
+        [HttpGet("/api/getAdminByEmail")]
 
         public OrganizationAdmin getAdminByEmail()
         {
@@ -34,7 +31,6 @@ namespace InterCareBackend.Controllers
         [HttpDelete("/api/deleteAdminByEmail")]
         public void delete()
         {
-            db.getCollection();
             adminDao.deleteAdmin("Jonar17@student.sdu.dk");
         }
 

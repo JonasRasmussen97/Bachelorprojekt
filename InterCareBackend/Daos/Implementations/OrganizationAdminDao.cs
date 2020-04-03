@@ -21,7 +21,23 @@ namespace InterCareBackend.Daos.Implementations
         public OrganizationAdminDao()
         {
             db = new Database("InterCare", "users");
-   
+
+        }
+
+
+        public void createAdmin(string email, string fullName, string password, string accessLevel, string gender, string age, string type)
+        {
+            db.setCollection("users");
+            var userDocument = new BsonDocument
+            {
+                { "Email", email },
+                { "FullName", fullName },
+                { "Password", password},
+                { "AccessLevel", accessLevel },
+                {"Type", type }
+            };
+
+            db.getCollection().InsertOne(userDocument);
         }
 
 
@@ -42,32 +58,14 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-
         public void deleteAdmin(String email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
             db.getCollection().DeleteOne(filter);
-       
-        }
 
-        public void createAdmin(string email, string fullName, string password, string accessLevel, string gender, string age, string type)
-        {
-            db.setCollection("users");
-            var userDocument = new BsonDocument
-            {
-                { "Email", email },
-                { "FullName", fullName },
-                { "Password", password},
-                { "AccessLevel", accessLevel },
-                {"Type", type }
-            };
-            
-            db.getCollection().InsertOne(userDocument);
         }
 
 
-
-
     }
-    }
+}

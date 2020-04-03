@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using InterCareBackend.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
@@ -23,15 +21,16 @@ namespace InterCareBackend.Daos.Implementations
 
         }
 
-        public void createClient(string email, string fullName, string password, string accessLevel, string gender, string age)
+        public void createClient(string email, string password, string fullName, string accessLevel, string type, string gender, string age)
         {
             db.setCollection("users");
             var userDocument = new BsonDocument
             {
                 { "Email", email },
-                { "FullName", fullName },
                 { "Password", password},
+                { "FullName", fullName },
                 { "AccessLevel", accessLevel },
+                { "Type", type },
                 { "Gender", gender },
                 { "Age", age }
             };
@@ -47,7 +46,7 @@ namespace InterCareBackend.Daos.Implementations
             {
                 // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
                 var client = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                return new Client(client["_id"].ToString(), client["Email"].ToString(), client["Password"].ToString(), client["Fullname"].ToString(), client["Accesslevel"].ToString(), client["Gender"].ToString(), client["Age"].ToString(), client["Type"].ToString());
+                return new Client(client["_id"].ToString(), client["Email"].ToString(), client["FullName"].ToString(), client["Password"].ToString(), client["AccessLevel"].ToString(), client["Type"].ToString(), client["Gender"].ToString(), client["Age"].ToString());
             }
             else
             {
