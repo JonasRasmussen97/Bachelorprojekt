@@ -1,21 +1,21 @@
+
 <template>
   <div class="login-page">
     <div class="form">
-      <form action="http://localhost:55246/api/login" method="POST">
         <div>
-          <input name="say" id="username" placeholder="Username" />
+          <input name="username" v-model="username" id="username" placeholder="Username" />
         </div>
         <div>
-          <input name="to" id="password" placeholder="Password" />
+          <input name="password" v-model="password" id="password" placeholder="Password" />
         </div>
         <div>
-          <button>Login</button>
+          <button v-on:click="login()">Login</button>
+          <button v-on:click="testJWT()">After login</button>
         </div>
         <p class="message">
           Not registered?
           <a href="#">Create an account</a>
         </p>
-      </form>
     </div>
   </div>
 </template>
@@ -127,3 +127,70 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 </style>
+
+<script>
+import { mapMutations } from 'vuex'
+export default {
+  username: "",
+  password: "",
+  token: "dsff",
+  test: "",
+  computed: {
+    JWT () {
+      return this.$store.getters.JWT;
+    }
+    },
+  methods: {
+    async login() {
+      
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+myHeaders.append("Authorization", "Bearer" + this.JWT);
+
+var urlencoded = new URLSearchParams();
+urlencoded.append("username", username.value);
+urlencoded.append("password", password.value);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:55246/api/login", requestOptions)
+  .then(response => response.text())
+  // Send the token to the global variable so all components can use it.
+  .then(result => this.changeJWT("changeJWT", result))
+  .catch(error => console.log('error', error));
+    },
+
+
+async testJWT() {
+      
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+myHeaders.append("Authorization", "Bearer" + this.JWT);
+
+
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:55246/api/test", requestOptions)
+  .then(response => response.text())
+  // Send the token to the global variable so all components can use it.
+  .then(result => this.changeJWT("changeJWT", result))
+  .catch(error => console.log('error', error));
+    },
+
+  changeJWT(state, payload) {
+      this.$store.commit(state, payload);
+    }
+
+  }
+}
+</script>

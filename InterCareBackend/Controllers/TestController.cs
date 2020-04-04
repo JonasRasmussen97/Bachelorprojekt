@@ -5,15 +5,22 @@ using InterCareBackend.Models;
 using JWT.Algorithms;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace InterCareBackend.Controllers
 {
 
+
+
     [ApiController]
     public class TestController : ControllerBase
     {
+
+        // This will contain the token of the client that is trying to access endpoints that require authorization.
+        String clientToken = "";
+
         Database db = new Database("InterCare", "locations");
         AuthHelper auth = new AuthHelper();
         ClientDao dao = new ClientDao();
@@ -23,20 +30,29 @@ namespace InterCareBackend.Controllers
 
         //LOGIN OPERATIONS
         [HttpPost("/api/login")]
-        public IActionResult login()
+        public String login()
         {
             var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
-            return Ok(new { token = tokenString });
+            return tokenString;
         }
 
-        [DisableCors]
+  
         [HttpGet("/api/test")]
         public String testJWT()
         {
-
-            return auth.getBuilder()
+            // We start by getting the token from the client.
+            clientToken = auth.getBuilder()
                 .WithAlgorithm(new HMACSHA256Algorithm())
                 .Decode(Request.Headers["Authorization"]);
+            JObject.Parse(clientToken)["username"].ToString();
+            if(JObject.Parse(clientToken)["accessLevel"].ToString() == "0")
+            {
+                return "Welcome!";
+            } else
+            {
+                return "You are not allowed to use this endpoint.";
+            }
+
         }
 
         // USER OPERATIONS

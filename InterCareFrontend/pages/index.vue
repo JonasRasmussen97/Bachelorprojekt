@@ -25,13 +25,14 @@
           <section>
             <h1>GET API Result Index</h1>
             <div>
-              <button v-on:click="doSomethingWithJWT">{resp}</button>
+              <button v-on:click="getit()">{resp}</button>
             </div>
           </section>
         </div>
       </div>
       <div class="row">
       <div class="col">
+        <button >{{this.JWT}}</button>
         <Footer></Footer>
         </div>
         </div>
@@ -41,11 +42,18 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Navbar from "~/components/Navbar";
 import LoginForm from "~/components/LoginForm";
 import Footer from "~/components/Footer";
 import axios from "axios";
 export default {
+
+  computed: {
+    JWT () {
+      return this.$store.getters.JWT;
+    }
+  },
   resp: "Fetch",
   components: {
     Navbar,
@@ -53,29 +61,11 @@ export default {
     Footer
   },
   methods: {
-    async fetchJWT() {
-      // Error handling and such omitted here for simplicity.
-      const res = await fetch(`http://localhost:55246/api/login/`);
-      this.jwt = await res.text();
+    changeJWT(state, payload) {
+      this.$store.commit(state, payload);
+      console.log(this.JWT)
     },
-     async doSomethingWithJWT() {
-     var myHeaders = new Headers();
-     myHeaders.append("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODU5MTcyNjIsInVzZXJuYW1lIjoiVGhvbWFzIiwicGFzc3dvcmQiOiJOaWdnYSIsImFjY2Vzc0xldmVsIjoiMCJ9.XoiChMMimfM8ABYLRfGyctdipmO6GHPLuNOYs-GIBdA");
-
-    var urlencoded = new URLSearchParams();
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:55246/api/test", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  },
-}
+},
 }
 
 </script>

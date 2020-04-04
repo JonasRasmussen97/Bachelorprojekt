@@ -41,14 +41,14 @@ namespace InterCareBackend.Helpers
            .AddClaim("accessLevel", "0")
            .Encode();
             // If the password and username is found in the DB, then generate the JWT.
-            /*
+            
             if (db.checkLogin(username, password)) {
                 return token;
             } else
             {
                 return "Unable to login!";
             }
-            */
+            
             return token;
         }
     }

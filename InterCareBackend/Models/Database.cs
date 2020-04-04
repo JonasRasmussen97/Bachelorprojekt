@@ -244,7 +244,7 @@ namespace InterCareBackend.Models
             collection.DeleteOne(filter);
         }
 
-
+        */
         // LOGIN OPERATIONS
         public Boolean checkLogin(String username, String password)
         {
@@ -272,7 +272,7 @@ namespace InterCareBackend.Models
             return false;
         }
 
-    */
+    
 
 
     }
