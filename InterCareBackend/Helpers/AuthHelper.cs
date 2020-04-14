@@ -1,7 +1,9 @@
 ﻿using InterCareBackend.Models;
 using JWT.Algorithms;
 using JWT.Builder;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
 using System;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace InterCareBackend.Helpers
 {
-    public class AuthHelper
+    public class AuthHelper : ControllerBase
     {
         // The secret that is used to authorize if people are allowed to access endpoints.
         String secret = "mU1ojWk5LvBlr7A94v8iEIfKEk5QIy9s";
@@ -35,9 +37,9 @@ namespace InterCareBackend.Helpers
 
 
         // Authorizes the user and returns a token if the user is valid.
-        public String authUser(String username, String password)
+        public IActionResult authUser(String username, String password)
         {
-            var token = new JwtBuilder()
+            var tokenString = new JwtBuilder()
            .WithAlgorithm(new HMACSHA256Algorithm())
            .WithSecret(secret)
            .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
@@ -46,41 +48,43 @@ namespace InterCareBackend.Helpers
            .AddClaim("accessLevel", "0")
            .Encode();
             // If the password and username is found in the DB, then generate the JWT.
-            /*
-            if (db.checkLogin(username, password)) {
-                return token;
-            } else
+
+            if (checkLogin(username, password))
             {
-                return "Unable to login!";
+                return Ok(new { token = tokenString });
             }
-            */
-            return token;
+            else
+            {
+                return Ok(new { message = "Unable to login!" });
+            }
+
         }
 
 
         public Boolean checkLogin(String username, String password)
         {
-            // Query searches for any record with the email parameter being the entered email(username).
+            System.Diagnostics.Debug.WriteLine(username + " and " + password);
+
+            db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", username);
-
-            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
-            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
-
-            if (collection.Find(filter).Project(projectionRemoveId).FirstOrDefault() != null)
+            if (db.getCollection().Find(filter).FirstOrDefault() != null)
             {
-                // Make a JObject from the JSON returned by MongoDB.
-                JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
-                // Checks if the entered username and password fits the user from the database.
-                if (username == (string)jUser["Email"] && password == (string)jUser["Password"])
+                // Use BsonSerializer to deserialize the BsonDocument. Then we can retrieve all the values.
+                var User = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
+                System.Diagnostics.Debug.WriteLine("HEJ");
+                if (username == User["Email"].ToString() && password == User["Password"].ToString())
                 {
+
                     return true;
                 }
                 else
                 {
-                    //   System.Diagnostics.Debug.WriteLine(Email + " : " + username + " - " +  password + " : " + Password);
+                    System.Diagnostics.Debug.WriteLine("It is false!");
                     return false;
                 }
             }
+
+
             return false;
         }
     }

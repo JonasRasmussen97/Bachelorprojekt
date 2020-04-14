@@ -1,129 +1,88 @@
 <template>
-  <div class="login-page">
-    <div class="form">
-      <form action="http://localhost:55246/api/login" method="POST">
-        <div>
-          <input name="say" id="username" placeholder="Username" />
+  <div v-if="Token === undefined" class="login-form">
+        <h2 class="text-center">Log in</h2>       
+        <div  class="form-group">
+            <input type="text"  v-model="email" class="form-control" placeholder="Email" required="required">
         </div>
-        <div>
-          <input name="to" id="password" placeholder="Password" />
+        <div class="form-group">
+            <input type="password" v-model="password" class="form-control" placeholder="Password" required="required">
         </div>
-        <div>
-          <button>Login</button>
+        <div class="form-group">
+            <button v-on:click="login()" class="btn btn-primary btn-block">Log in</button>
         </div>
-        <p class="message">
-          Not registered?
-          <a href="#">Create an account</a>
-        </p>
-      </form>
-    </div>
+        <div class="clearfix">
+            <a href="#" class="text-center">Forgot Password?</a>
+        </div>        
+    <p class="text-center"><a href="#">Create an Account</a></p>
+    <p class="text-center">Login status: {{status}}</p>
   </div>
 </template>
 
 
+<script>
+import Cookies from 'js-cookie'
+import axios from 'axios'
+export default {
+  data: function() {
+    return {
+      Token: Cookies.get('token'),
+      email: "",
+      password: "",
+      Resp: "",
+      status: ""
+    }
+  },
+  methods: {
+  login() {
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+var urlencoded = new URLSearchParams();
+urlencoded.append("email", this.email);
+urlencoded.append("password", this.password);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: urlencoded,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:55246/api/login", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+      if(JSON.parse(result).token != null) {
+      console.log(JSON.parse(result).token);
+      Cookies.set("token", JSON.parse(result).token);
+      this.status = "You are logged in!";
+      } else {
+        this.status ="Unable to login!";
+      }
+  });
+  }
+  }
+}
+</script>
 
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-.login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-.form {
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 35px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  margin-top: -70px;
-}
-.form input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #4caf50;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #ffffff;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.form button:hover,
-.form button:active,
-.form button:focus {
-  background: #43a047;
-}
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form .message a {
-  color: #4caf50;
-  text-decoration: none;
-}
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before,
-.container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #ef3b3a;
-}
-body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8dc26f);
-  background: -moz-linear-gradient(right, #76b852, #8dc26f);
-  background: -o-linear-gradient(right, #76b852, #8dc26f);
-  background: linear-gradient(to left, #76b852, #8dc26f);
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+.login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
 </style>

@@ -13,9 +13,9 @@ namespace InterCareBackend.Controllers
         AuthHelper auth = new AuthHelper();
 
         [HttpPost("/api/login")]
-        public String login()
+        public IActionResult login()
         {
-            var tokenString = auth.authUser(Request.Form["username"], Request.Form["password"]);
+            var tokenString = auth.authUser(Request.Form["email"], Request.Form["password"]);
             return tokenString;
         }
 

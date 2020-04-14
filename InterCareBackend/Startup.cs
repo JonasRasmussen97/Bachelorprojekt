@@ -37,8 +37,8 @@ namespace InterCareBackend
                     builder =>
                     {
 
-                        builder.WithOrigins("http://example.com",
-                                            "http://www.contoso.com");
+                        builder.WithOrigins("http://localhost:3000",
+                                            "http://localhost");
                     });
 
                 options.AddPolicy("AllowAllHeaders",
@@ -60,6 +60,7 @@ namespace InterCareBackend
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAllHeaders");
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
