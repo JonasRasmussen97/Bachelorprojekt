@@ -129,7 +129,6 @@ C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netco
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csprojAssemblyReference.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csproj.CoreCompileInputs.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.AssemblyInfoInputs.cache
@@ -238,6 +237,7 @@ C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\t
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csprojAssemblyReference.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.RazorTargetAssemblyInfo.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csproj.CopyComplete
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\staticwebassets\InterCareBackend.StaticWebAssets.Manifest.cache

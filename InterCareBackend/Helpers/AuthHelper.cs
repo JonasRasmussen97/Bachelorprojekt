@@ -1,6 +1,9 @@
 ﻿using InterCareBackend.Models;
 using JWT.Algorithms;
 using JWT.Builder;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,8 @@ namespace InterCareBackend.Helpers
         String secret = "mU1ojWk5LvBlr7A94v8iEIfKEk5QIy9s";
         Database db = new Database("InterCare", "users");
         JwtBuilder builder;
+        IMongoCollection<BsonDocument> collection;
+        FilterDefinition<BsonDocument> filter;
 
         public AuthHelper()
         {
@@ -51,8 +56,32 @@ namespace InterCareBackend.Helpers
             */
             return token;
         }
-    }
-    }
 
 
-    
+        public Boolean checkLogin(String username, String password)
+        {
+            // Query searches for any record with the email parameter being the entered email(username).
+            filter = Builders<BsonDocument>.Filter.Eq("Email", username);
+
+            // Filter out the ID since it breaks JSON conversion, due to the nature of mongoDB (objectID).
+            ProjectionDefinition<BsonDocument> projectionRemoveId = Builders<BsonDocument>.Projection.Exclude("_id");
+
+            if (collection.Find(filter).Project(projectionRemoveId).FirstOrDefault() != null)
+            {
+                // Make a JObject from the JSON returned by MongoDB.
+                JObject jUser = JObject.Parse(collection.Find(filter).Project(projectionRemoveId).FirstOrDefault().ToJson());
+                // Checks if the entered username and password fits the user from the database.
+                if (username == (string)jUser["Email"] && password == (string)jUser["Password"])
+                {
+                    return true;
+                }
+                else
+                {
+                    //   System.Diagnostics.Debug.WriteLine(Email + " : " + username + " - " +  password + " : " + Password);
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+}
