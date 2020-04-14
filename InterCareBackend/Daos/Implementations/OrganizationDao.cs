@@ -65,9 +65,30 @@ namespace InterCareBackend.Daos.Implementations
 
         public void deleteOrganization(String name)
         {
+            // Removes organization
             db.setCollection("organizations");
             filter = Builders<BsonDocument>.Filter.Eq("Name", name);
             db.getCollection().DeleteOne(filter);
+
+            // Removes related organization admin
+            
+
+        }
+
+        public void deleteOrganizationAndAdmin (String name)
+        {
+            // Removes organization and it's connection admin in users collection
+
+            var organization = getOrganization(name);
+     
+            var userFilter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(organization.AdminId));
+            db.setCollection("users");
+            db.getCollection().DeleteOne(userFilter);
+
+            var orgFilter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            db.setCollection("organizations");
+            db.getCollection().DeleteOne(orgFilter);
+
 
         }
 

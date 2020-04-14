@@ -28,7 +28,13 @@ namespace InterCareBackend.Controllers
         [HttpDelete("api/deleteOrganizationByName")]
         public void deleteOrganization()
         {
-            organizationDao.deleteOrganization("Amazon");
+            organizationDao.deleteOrganization("TestOrg");
+        }
+
+        [HttpDelete("api/deleteOrganizationAndAdmin")]
+        public void deleteOrganizationAndAdmin()
+        {
+            organizationDao.deleteOrganizationAndAdmin("TestOrg");
         }
 
     }
