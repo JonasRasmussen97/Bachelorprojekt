@@ -79,7 +79,7 @@ namespace InterCareBackend.Daos.Implementations
                         filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationsList[i]));
                         var locationObj = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
                         List<string> managersList = BsonSerializer.Deserialize<List<string>>(locationObj["Managers"].ToJson());
-                    locations.Add(new Location(locationObj["_id"].ToString(), locationObj["Name"].ToString(), locationObj["Address"].ToString(), locationObj["PostalCode"].ToString(), locationObj["Country"].ToString(), locationObj["Images"].ToString(), managersList));
+                        locations.Add(new Location(locationObj["_id"].ToString(), locationObj["Name"].ToString(), locationObj["Address"].ToString(), locationObj["PostalCode"].ToString(), locationObj["Country"].ToString(), locationObj["Images"].ToString(), managersList));
                 }
                     return locations;
                 }

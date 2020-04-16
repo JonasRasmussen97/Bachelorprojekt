@@ -31,10 +31,10 @@ namespace InterCareBackend.Controllers
             organizationDao.deleteOrganization("TestOrg");
         }
 
-        [HttpDelete("api/deleteOrganizationAndAdmin")]
-        public void deleteOrganizationAndAdmin()
+        [HttpDelete("api/deleteEntireOrganization")]
+        public void deleteEntireOrganization()
         {
-            organizationDao.deleteOrganizationAndAdmin("TestOrg");
+            organizationDao.deleteEntireOrganization("Odense");
         }
 
     }

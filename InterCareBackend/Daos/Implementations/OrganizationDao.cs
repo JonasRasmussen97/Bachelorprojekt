@@ -17,6 +17,7 @@ namespace InterCareBackend.Daos.Implementations
         FilterDefinition<BsonDocument> filter;
 
         LocationDao locationDao = new LocationDao();
+        LocationManagerDao managerDao = new LocationManagerDao();
 
 
         public OrganizationDao()
@@ -77,35 +78,45 @@ namespace InterCareBackend.Daos.Implementations
 
         }
 
-        public async void deleteOrganizationAndAdmin (String name)
+        // Deletes the whole organization and anything connected to it. This includes location(s), location manager(s) and the organization admin(s). 
+        public async void deleteEntireOrganization (String name)
         {
             // Removes organization and it's connection admin in users collection
 
             var organization = getOrganization(name);
 
-            /*
             db.setCollection("users");
             var userFilter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(organization.AdminId));
             db.getCollection().DeleteOne(userFilter);
-
-            db.setCollection("locations");
-            v
-            var locationFilter = Builders<BsonDocument>.Filter.In("_id", new ObjectId(organization.Locations.ForEach.locationList))
-            */
+           
 
             db.setCollection("locations");
             var locationList = locationDao.getLocationsFromOrganization(name);
+            List<LocationManager> managerList;
             for (int i = 0; i < locationList.Count; i++)
             {
-                var filter = Builders<BsonDocument>.Filter.In("_id", locationList.Select(i => i.Id));
-                db.getCollection().DeleteMany(filter);
+                managerList = managerDao.getManagersFromLocations(locationList[i].Name);
+
+
+                db.setCollection("users");
+                // For-loop that deletes all the managers for each location.
+                for (int a = 0; a < managerList.Count; a++)
+                {
+                filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(managerList[i].id));
+                db.getCollection().DeleteOne(filter);
+                }
+
+                db.setCollection("locations");
+                // Deletes the location after the managers have been deleted.
+                filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationList[i].Id));
+                db.getCollection().DeleteOne(filter);
             }
                     
 
 
 
 
-            deleteOrganization(name);
+           deleteOrganization(name);
 
         }
 
