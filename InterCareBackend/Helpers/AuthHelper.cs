@@ -1,4 +1,5 @@
 ﻿using InterCareBackend.Models;
+using JWT;
 using JWT.Algorithms;
 using JWT.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -33,35 +34,27 @@ namespace InterCareBackend.Helpers
             return this.builder;
         }
 
-
-
-
-        // Authorizes the user and returns a token if the user is valid.
-        public IActionResult authUser(String username, String password)
+        // Decodes the JWT and returns it as a dictionary.
+        public IDictionary<string, object> decodeJWT(String JWT)
         {
-            var tokenString = new JwtBuilder()
-           .WithAlgorithm(new HMACSHA256Algorithm())
-           .WithSecret(secret)
-           .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
-           .AddClaim("username", username)
-           .AddClaim("password", password)
-           .AddClaim("accessLevel", "0")
-           .Encode();
-            // If the password and username is found in the DB, then generate the JWT.
-
-            if (checkLogin(username, password))
+            try
             {
-                return Ok(new { token = tokenString });
-            }
-            else
+                return new JwtBuilder().WithSecret(secret).WithAlgorithm(new HMACSHA256Algorithm()).MustVerifySignature().Decode<IDictionary<string, object>>(JWT);
+            } catch(TokenExpiredException)
             {
-                return Ok(new { message = "Unable to login!" });
+                return null;
+            } catch(SignatureVerificationException)
+            {
+                return null;
+            } catch(InvalidTokenPartsException)
+            {
+                return null;
             }
-
         }
 
 
-        public Boolean checkLogin(String username, String password)
+
+        public IActionResult checkLogin(String username, String password)
         {
             System.Diagnostics.Debug.WriteLine(username + " and " + password);
 
@@ -75,17 +68,27 @@ namespace InterCareBackend.Helpers
                 if (username == User["Email"].ToString() && password == User["Password"].ToString())
                 {
 
-                    return true;
+                    var tokenString = new JwtBuilder()
+          .WithAlgorithm(new HMACSHA256Algorithm())
+          .WithSecret(secret)
+          .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
+          .AddClaim("username", username)
+          .AddClaim("password", password)
+          .AddClaim("type", User["Type"])
+          .Encode();
+                    // If the password and username is found in the DB, then generate the JWT.
+
+                    return Ok(new { token = tokenString });
                 }
                 else
                 {
                     System.Diagnostics.Debug.WriteLine("It is false!");
-                    return false;
+                    return Ok(new { message = "Unable to login!" });
                 }
             }
 
 
-            return false;
+            return Ok(new { message = "Unable to login!" });
         }
     }
 }

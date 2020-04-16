@@ -21,16 +21,6 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
-          <section>
-            <h1>GET API Result Index</h1>
-            <div>
-              <button v-on:click="doSomethingWithJWT">{resp}</button>
-            </div>
-          </section>
-        </div>
-      </div>
-      <div class="row">
       <div class="col">
         <Footer></Footer>
         </div>
