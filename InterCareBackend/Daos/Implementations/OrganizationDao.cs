@@ -16,6 +16,8 @@ namespace InterCareBackend.Daos.Implementations
         // Instantiate filter to enable filtering of results from database.
         FilterDefinition<BsonDocument> filter;
 
+        LocationDao locationDao = new LocationDao();
+
 
         public OrganizationDao()
         {
@@ -75,20 +77,35 @@ namespace InterCareBackend.Daos.Implementations
 
         }
 
-        public void deleteOrganizationAndAdmin (String name)
+        public async void deleteOrganizationAndAdmin (String name)
         {
             // Removes organization and it's connection admin in users collection
 
             var organization = getOrganization(name);
-     
-            var userFilter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(organization.AdminId));
+
+            /*
             db.setCollection("users");
+            var userFilter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(organization.AdminId));
             db.getCollection().DeleteOne(userFilter);
 
-            var orgFilter = Builders<BsonDocument>.Filter.Eq("Name", name);
-            db.setCollection("organizations");
-            db.getCollection().DeleteOne(orgFilter);
+            db.setCollection("locations");
+            v
+            var locationFilter = Builders<BsonDocument>.Filter.In("_id", new ObjectId(organization.Locations.ForEach.locationList))
+            */
 
+            db.setCollection("locations");
+            var locationList = locationDao.getLocationsFromOrganization(name);
+            for (int i = 0; i < locationList.Count; i++)
+            {
+                var filter = Builders<BsonDocument>.Filter.In("_id", locationList.Select(i => i.Id));
+                db.getCollection().DeleteMany(filter);
+            }
+                    
+
+
+
+
+            deleteOrganization(name);
 
         }
 
