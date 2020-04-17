@@ -33,9 +33,9 @@ namespace InterCareBackend.Controllers
         }
 
         [HttpGet("/api/getLocationsFromManagerId")]
-        public Location getLocationsFromManagerId()
+        public Location getLocationFromManagerId()
         {
-            return locationDao.getLocationsFromManagerId("5e8330341c9d440000c2d82f");
+            return locationDao.getLocationFromManagerId("5e8330341c9d440000c2d82f");
         }
 
 

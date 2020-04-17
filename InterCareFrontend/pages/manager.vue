@@ -95,8 +95,21 @@ fetch("http://localhost:55246/api/getUserType", requestOptions)
       return { articles: data };
     },
     async getLocationsData() {
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + this.token);
+      var urlencoded = new URLSearchParams();
 
-    }
+      var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+};
+
+fetch("http://localhost:55246/api/getLocationsFromManagerId", requestOptions)
+  .then(response => response.text())
+  .then(result => this.type = result)
+  .catch(error => console.log('error', error));
+  }
   }
 };
 </script>
