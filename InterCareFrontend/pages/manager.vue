@@ -93,6 +93,9 @@ fetch("http://localhost:55246/api/getUserType", requestOptions)
         url: url
       }).then(data => (this.data = data));
       return { articles: data };
+    },
+    async getLocationsData() {
+
     }
   }
 };

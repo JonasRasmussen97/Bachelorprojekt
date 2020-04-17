@@ -89,6 +89,29 @@ namespace InterCareBackend.Daos.Implementations
                 } 
         }
 
+        public Location getLocationFromManagerId(string id)
+        {
+            db.setCollection("locations");
+            if (db.getCollection() != null)
+            {
+                var documents = db.getCollection().Find(new BsonDocument()).ToList();
+                
+                foreach (BsonDocument doc in documents)
+                {
+                    var locationObject = BsonSerializer.Deserialize<BsonDocument>(doc.ToJson());
+                    List<string> managers = BsonSerializer.Deserialize<List<string>>(locationObject["Managers"].ToJson());
+                    for (int i = 0; i < managers.Count; i++)
+                    {
+                        if(managers[i] == id)
+                        {
+                          return new Location(locationObject["_id"].ToString(), locationObject["Name"].ToString(), locationObject["Address"].ToString(), locationObject["PostalCode"].ToString(), locationObject["Country"].ToString(), locationObject["Images"].ToString(), managers);
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         // Takes the name of the location and the field we want to update, and the value we want to update it with.
         public void updateLocation(String locationName, String updateField, String updateValue)
         {

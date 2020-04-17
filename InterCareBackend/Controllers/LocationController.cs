@@ -32,6 +32,12 @@ namespace InterCareBackend.Controllers
             return locationDao.getLocationsFromOrganization("Sygehus");
         }
 
+        [HttpGet("/api/getLocationsFromManagerId")]
+        public Location getLocationsFromManagerId()
+        {
+            return locationDao.getLocationsFromManagerId("5e8330341c9d440000c2d82f");
+        }
+
 
         [HttpPut("/api/updateLocation")]
         public void updateLocation()
