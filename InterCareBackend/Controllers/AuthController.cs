@@ -41,6 +41,9 @@ namespace InterCareBackend.Controllers
             } catch(KeyNotFoundException)
             {
                 return "Unable to get type. Please try again later";
+            } catch(NullReferenceException)
+            {
+                return null;
             }
         }
 

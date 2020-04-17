@@ -26,6 +26,7 @@
   </div>
 </template>
 
+
 <script>
 import Cookies from 'js-cookie'
 import Navbar from "~/components/Navbar";
@@ -48,7 +49,7 @@ export default {
     }
     },
   // What to do before the page is created.
-  mounted() {
+mounted() {
 var myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer " + this.token);
 var urlencoded = new URLSearchParams();
