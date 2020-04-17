@@ -66,6 +66,29 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
+        public List<Organization> getAllOrganizations()
+        {
+            db.setCollection("organizations");
+            List<Organization> organizations = new List<Organization>();
+            if (db.getCollection() != null)
+            {
+                var documents = db.getCollection().Find(new BsonDocument()).ToList();
+
+                foreach (BsonDocument doc in documents)
+                {
+                    var organizationObject = BsonSerializer.Deserialize<BsonDocument>(doc.ToJson());
+                    List<string> locations = BsonSerializer.Deserialize<List<string>>(organizationObject["Locations"].ToJson());
+                    organizations.Add(new Organization(organizationObject["_id"].ToString(), organizationObject["Name"].ToString(), locations, organizationObject["AdminId"].ToString()));
+                }
+                return organizations;
+            } 
+            else
+            {
+                return null;
+            }
+        }
+
+
         public void deleteOrganization(String name)
         {
             // Removes organization
@@ -74,12 +97,12 @@ namespace InterCareBackend.Daos.Implementations
             db.getCollection().DeleteOne(filter);
 
             // Removes related organization admin
-            
+
 
         }
 
         // Deletes the whole organization and anything connected to it. This includes location(s), location manager(s) and the organization admin(s). 
-        public async void deleteEntireOrganization (String name)
+        public async void deleteEntireOrganization(String name)
         {
             // Removes organization and it's connection admin in users collection
 
@@ -88,7 +111,7 @@ namespace InterCareBackend.Daos.Implementations
             db.setCollection("users");
             var userFilter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(organization.AdminId));
             db.getCollection().DeleteOne(userFilter);
-           
+
 
             db.setCollection("locations");
             var locationList = locationDao.getLocationsFromOrganization(name);
@@ -102,8 +125,8 @@ namespace InterCareBackend.Daos.Implementations
                 // For-loop that deletes all the managers for each location.
                 for (int a = 0; a < managerList.Count; a++)
                 {
-                filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(managerList[i].id));
-                db.getCollection().DeleteOne(filter);
+                    filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(managerList[i].id));
+                    db.getCollection().DeleteOne(filter);
                 }
 
                 db.setCollection("locations");
@@ -111,12 +134,12 @@ namespace InterCareBackend.Daos.Implementations
                 filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationList[i].Id));
                 db.getCollection().DeleteOne(filter);
             }
-                    
 
 
 
 
-           deleteOrganization(name);
+
+            deleteOrganization(name);
 
         }
 
