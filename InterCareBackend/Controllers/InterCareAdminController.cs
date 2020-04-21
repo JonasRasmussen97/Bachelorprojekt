@@ -20,10 +20,11 @@ namespace InterCareBackend.Controllers
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 interCareAdminDao.createInterCareAdmin("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalInterCareAdmin);
-                return "Success!";
-            } else
+                return Globals.GlobalValidType;
+            }
+            else
             {
-                return "You need to be an InterCare";
+                return Globals.GlobalInvalidType;
             }
         }
 
@@ -32,14 +33,37 @@ namespace InterCareBackend.Controllers
 
         public InterCareAdmin getAdminByEmail()
         {
-            return interCareAdminDao.getInterCareAdminByEmail("Jonar17@student.sdu.dk");
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+
+            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            {
+                return interCareAdminDao.getInterCareAdminByEmail("Jonar17@student.sdu.dk");
+            }
+            else
+            {
+                return null;
+            }
         }
 
 
         [HttpDelete("/api/deleteInterCareAdminByEmail")]
-        public void delete()
+        public string delete()
         {
-            interCareAdminDao.deleteInterCareAdmin("Jonar17@student.sdu.dk");
+            
+
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            {
+                interCareAdminDao.deleteInterCareAdmin("Jonar17@student.sdu.dk");
+                return Globals.GlobalValidType;
+            }
+            else
+            {
+                return Globals.GlobalInvalidType;
+            }
+
         }
 
 
