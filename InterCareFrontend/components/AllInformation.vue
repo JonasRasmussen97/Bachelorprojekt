@@ -45,7 +45,7 @@ export default {
           'Email', 'Full Name', 'Type'
         ],
         items2: [
-            { Email: "Nylocation2", 'Full Name': 'Bedevej 28', Type: '5700'},
+          
         ]
       }
     },
@@ -70,7 +70,19 @@ fetch("http://localhost:55246/api/getAllOrganizations", requestOptions)
     }
   })
   .catch(error => console.log('error', error));
+
+fetch("http://localhost:55246/api/getAllUsers", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    var i; 
+    for(i = 0; i < JSON.parse(result).length; i++) {
+     this.items2.push({Email: JSON.parse(result)[i].email, 'Full Name': JSON.parse(result)[i].fullName, Type: JSON.parse(result)[i].type});
+    }
+  })
+  .catch(error => console.log('error', error));
+
   },
+  
       }
     }
 </script>
