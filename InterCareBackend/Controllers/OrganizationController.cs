@@ -24,6 +24,13 @@ namespace InterCareBackend.Controllers
             return organizationDao.getOrganization("Amazon");
         }
 
+        [HttpGet("/api/getOrganizationFromAdminId")]
+        public Organization getOrganizationFromAdminId()
+        {
+            return organizationDao.getOrganizationFromAdminId("5e832fd01c9d440000c2d82e");
+        }
+        
+
         [HttpGet("/api/getAllOrganizations")]
         public List<Organization> getAllOrganizations()
         {

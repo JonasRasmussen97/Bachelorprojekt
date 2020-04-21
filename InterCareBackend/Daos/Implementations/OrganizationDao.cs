@@ -65,6 +65,33 @@ namespace InterCareBackend.Daos.Implementations
             }
         }
 
+
+        public Organization getOrganizationFromAdminId(string id)
+        {
+            db.setCollection("organizations");
+            if (db.getCollection() != null)
+            {
+                var documents = db.getCollection().Find(new BsonDocument()).ToList();
+
+                foreach (BsonDocument doc in documents)
+                {
+                    var organizationObject = BsonSerializer.Deserialize<BsonDocument>(doc.ToJson());
+                    var admin = BsonSerializer.Deserialize<string>(organizationObject["AdminId"].ToJson());
+                    List<string> locations = BsonSerializer.Deserialize<List<string>>(organizationObject["Locations"].ToJson());
+
+                    for (int i = 0; i < documents.Count; i++)
+                    {
+                        if (admin == id)
+                        {
+                            return new Organization(organizationObject["Name"].ToString(), locations);
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+
         // Used by Clients
         public List<Organization> getAllOrganizationsAsClient()
         {
