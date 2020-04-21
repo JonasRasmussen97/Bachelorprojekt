@@ -20,6 +20,14 @@ namespace InterCareBackend.Models
             Locations = locations;
             AdminId = adminId;
         }
+
+        // Used when clients can retrieve a list of all organizations. We then only send them name and the list of locations to prevent them from seeing data they are not supposed to see.
+        public Organization(string name, List<String> locations)
+        {
+            Name = name;
+            Locations = locations;
+        }
+
     }
 
 
