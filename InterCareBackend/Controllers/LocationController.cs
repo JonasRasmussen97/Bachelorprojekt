@@ -1,4 +1,5 @@
 ﻿using InterCareBackend.Daos.Implementations;
+using InterCareBackend.Helpers;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -6,10 +7,11 @@ using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
 {
-    public class LocationController
+    public class LocationController : ControllerBase
     {
 
         LocationDao locationDao = new LocationDao();
+        AuthHelper auth = new AuthHelper();
 
 
         [HttpPost("/api/createLocation")]
@@ -32,10 +34,12 @@ namespace InterCareBackend.Controllers
             return locationDao.getLocationsFromOrganization("Sygehus");
         }
 
-        [HttpGet("/api/getLocationsFromManagerId")]
+        [HttpGet("/api/getLocationFromManagerId")]
         public Location getLocationFromManagerId()
         {
-            return locationDao.getLocationFromManagerId("5e8330341c9d440000c2d82f");
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            return locationDao.getLocationFromManagerId(token["id"].ToString());
         }
 
 

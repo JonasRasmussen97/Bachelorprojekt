@@ -1,19 +1,30 @@
 ﻿using InterCareBackend.Daos.Implementations;
+using InterCareBackend.Helpers;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
 {
-    public class InterCareAdminController
+    public class InterCareAdminController : ControllerBase
     {
 
         InterCareAdminDao interCareAdminDao = new InterCareAdminDao();
-        
+        AuthHelper auth = new AuthHelper();
 
         [HttpPost("/api/createInterCareAdmin")]
-        public void create()
+        public string create()
         {
-            interCareAdminDao.createInterCareAdmin("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", "InterCareAdmin");
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            {
+                interCareAdminDao.createInterCareAdmin("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalInterCareAdmin);
+                return "Success!";
+            } else
+            {
+                return "You need to be an InterCare";
+            }
         }
 
 

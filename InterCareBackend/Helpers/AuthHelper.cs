@@ -72,6 +72,7 @@ namespace InterCareBackend.Helpers
           .WithAlgorithm(new HMACSHA256Algorithm())
           .WithSecret(secret)
           .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
+          .AddClaim("id", User["_id"])
           .AddClaim("username", username)
           .AddClaim("password", password)
           .AddClaim("type", User["Type"])

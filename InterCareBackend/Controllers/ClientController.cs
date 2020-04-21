@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
+
 namespace InterCareBackend.Controllers
 {
     public class ClientController : ControllerBase
@@ -18,7 +19,7 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createClient")]
         public void create()
         {
-            clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", "Client", "Male", "23");
+            clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
 
         }
 

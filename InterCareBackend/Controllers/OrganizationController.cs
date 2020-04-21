@@ -1,15 +1,16 @@
 ﻿using InterCareBackend.Daos.Implementations;
+using InterCareBackend.Helpers;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
 {
-    public class OrganizationController
+    public class OrganizationController : ControllerBase
     {
 
         OrganizationDao organizationDao = new OrganizationDao();
-
+        AuthHelper auth = new AuthHelper();
 
         [HttpPost("/api/createOrganization")]
         public void createOrganization()
@@ -27,7 +28,9 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getOrganizationFromAdminId")]
         public Organization getOrganizationFromAdminId()
         {
-            return organizationDao.getOrganizationFromAdminId("5e832fd01c9d440000c2d82e");
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
         }
         
 

@@ -29,23 +29,43 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
+  mounted() {
+    this.getAdminOrganization();
+  },
    data() {
       return {
+        token: Cookies.get('token'),
         fields: [
-         'Organization', 'Specialities', 'Edit'   
+         'Organization', 'Location', 'Edit'   
         ],
         items: [
-          { Organization: "Sygehus", Specialities: 'Balleløft'},
-        ],
-        fields2: [
-          'Location', 'Address', 'PostalCode', 'Country', 'Images', 'Edit'
-        ],
-        items2: [
-            { Location: "Nylocation2", Address: 'Bedevej 28', PostalCode: '5700', Country: 'Danmark', Images: "None"},
-          { Location: "Nylocation3", Address: 'Bedevej 28', PostalCode: '5700', Country: 'Danmark', Images: "None"} 
+          
         ]
       }
+    },
+        methods: {
+      getAdminOrganization() {
+var myHeaders = new Headers();
+myHeaders.append("Authorization", "Bearer " + this.token);
+var urlencoded = new URLSearchParams();
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:55246/api/getOrganizationFromAdminId", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    var i; 
+     this.items.push({Organization: JSON.parse(result).name, Location: JSON.parse(result).locations});
+  })
+  .catch(error => console.log('error', error));
+  },
+      }
     }
-}
+
 </script>
