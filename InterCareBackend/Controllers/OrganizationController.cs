@@ -30,6 +30,12 @@ namespace InterCareBackend.Controllers
             return organizationDao.getAllOrganizations();
         }
 
+        [HttpGet("/api/getAllOrganizationsAsClient")]
+        public List<Organization> getAllOrganizationsAsClient()
+        {
+            return organizationDao.getAllOrganizationsAsClient();
+        }
+
         [HttpDelete("api/deleteOrganizationByName")]
         public void deleteOrganization()
         {
