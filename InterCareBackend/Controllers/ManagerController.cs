@@ -18,7 +18,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalLocationManager)
             {
-                managerDao.createManager("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", "Manager");
+                managerDao.createManager("LocationManager@test.dk", "Pass", "Poul Andersen", "0", Globals.GlobalLocationManager);
                 return "Manager has been created!";
             } else
             {
@@ -35,7 +35,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalLocationManager)
             {
-                return managerDao.getLocationManagerByEmail("Jonar17@student.sdu.dk");
+                return managerDao.getLocationManagerByEmail("Test@test.dk");
             } else
             {
                 return null;
@@ -50,7 +50,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalOrganizationAdmin || token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
-                managerDao.deleteManager("Jonar17@student.sdu.dk");
+                managerDao.deleteManager("Test@test.dk");
                 return "Manager has been deleted";
             } else
             {

@@ -18,7 +18,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
-                interCareAdminDao.createInterCareAdmin("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalInterCareAdmin);
+                interCareAdminDao.createInterCareAdmin("InterCareAdmin@test.dk", "Pass", "Brian Løkke", "0", Globals.GlobalInterCareAdmin);
                 return Globals.GlobalValidType;
             }
             else
@@ -37,7 +37,7 @@ namespace InterCareBackend.Controllers
 
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
-                return interCareAdminDao.getInterCareAdminByEmail("Jonar17@student.sdu.dk");
+                return interCareAdminDao.getInterCareAdminByEmail("InterCareAdmin@test.dk");
             }
             else
             {
@@ -53,7 +53,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
-                interCareAdminDao.deleteInterCareAdmin("Jonar17@student.sdu.dk");
+                interCareAdminDao.deleteInterCareAdmin("InterCareAdmin@test.dk");
                 return Globals.GlobalValidType;
             }
             else
