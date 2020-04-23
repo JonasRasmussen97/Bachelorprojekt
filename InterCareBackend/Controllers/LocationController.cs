@@ -40,7 +40,13 @@ namespace InterCareBackend.Controllers
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             IDictionary<string, object> token = this.auth.decodeJWT(header);
-            return locationDao.getLocationFromManagerId(token["id"].ToString());
+            if (token["type"].ToString() == Globals.GlobalLocationManager)
+            {
+                return locationDao.getLocationFromManagerId(token["id"].ToString());
+            } else
+            {
+                return null;
+            }
         }
 
 

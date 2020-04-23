@@ -31,21 +31,42 @@ namespace InterCareBackend.Controllers
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             IDictionary<string, object> token = this.auth.decodeJWT(header);
-            return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
+            if (token["type"].ToString() == Globals.GlobalOrganizationAdmin)
+            {
+                return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
+            } else
+            {
+                return null;
+            }
         }
         
         // Used by InterCareAdmin
         [HttpGet("/api/getAllOrganizations")]
         public List<Organization> getAllOrganizations()
         {
-            return organizationDao.getAllOrganizations();
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            {
+                return organizationDao.getAllOrganizations();
+            } else
+            {
+                return null;
+            }
         }
 
         // Used by Client, LocationManager and OrganizationAdmin
         [HttpGet("/api/getAllOrganizationsAsClient")]
         public List<Organization> getAllOrganizationsAsClient()
         {
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+        if(token["type"].ToString() == Globals.GlobalClient || token["type"].ToString() == Globals.GlobalLocationManager || token["type"].ToString() == Globals.GlobalOrganizationAdmin) { 
             return organizationDao.getAllOrganizationsAsClient();
+            } else
+            {
+                return null;
+            }
         }
 
         [HttpDelete("api/deleteOrganizationByName")]

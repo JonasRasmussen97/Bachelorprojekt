@@ -18,8 +18,6 @@
             <b-dropdown-item v-if="Token != undefined">My Profile</b-dropdown-item>
             <b-dropdown-item v-if="Token != undefined" v-on:click="logout()">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
-
-
         </b-navbar-nav> 
       </b-collapse>
     </b-navbar>

@@ -65,35 +65,6 @@ fetch("http://localhost:55246/api/getUserType", requestOptions)
     Locations
   },
   methods: {
-    async asyncData() {
-      // Working PUT REQUEST.
-      var myHeaders = new Headers();
-      var formdata = new FormData();
-      formdata.append("email", "JonasBig");
-      formdata.append("fullName", "Big bananaman");
-      formdata.append("password", "dirtydirty");
-      formdata.append("accessLevel", "0");
-      formdata.append("gender", "Male");
-      formdata.append("age", "2000");
-      var requestOptions = {
-        method: "PUT",
-        headers: myHeaders,
-        body: formdata,
-        redirect: "follow"
-      };
-      fetch("http://localhost:55246/api/createClient", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log("error", error));
-    },
-    async getUser() {
-      const url = "http://localhost:55246/api/";
-      axios({
-        method: "get",
-        url: url
-      }).then(data => (this.data = data));
-      return { articles: data };
-    },
     async getLocationsData() {
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + this.token);
@@ -104,7 +75,6 @@ fetch("http://localhost:55246/api/getUserType", requestOptions)
       headers: myHeaders,
       redirect: 'follow'
 };
-
 fetch("http://localhost:55246/api/getLocationsFromManagerId", requestOptions)
   .then(response => response.text())
   .then(result => this.type = result)
