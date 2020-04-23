@@ -6,14 +6,14 @@ namespace InterCareBackend.Models
 {
     public class Database
     {
-        String DatabaseName;
-        String CollectionName;
+        string DatabaseName;
+        string CollectionName;
         MongoClient dbClient;
         IMongoDatabase database;
         IMongoCollection<BsonDocument> collection;
 
 
-        public Database(String DatabaseName, String CollectionName)
+        public Database(string DatabaseName, string CollectionName)
         {
             this.DatabaseName = DatabaseName;
             this.CollectionName = CollectionName;
@@ -23,7 +23,7 @@ namespace InterCareBackend.Models
             collection = database.GetCollection<BsonDocument>(CollectionName);
         }
 
-        public void setCollection(String collectionName)
+        public void setCollection(string collectionName)
         {
             this.CollectionName = collectionName;
             collection = database.GetCollection<BsonDocument>(collectionName);
