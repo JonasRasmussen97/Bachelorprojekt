@@ -19,7 +19,7 @@ namespace InterCareBackend.Controllers
             return tokenString;
         }
 
-       
+
         [HttpGet("/api/test")]
         public string testJWT()
         {
@@ -39,21 +39,28 @@ namespace InterCareBackend.Controllers
                 IDictionary<string, object> token = this.auth.decodeJWT(header);
                 try
                 {
-                    return token["type"].ToString();
+                    if (token != null)
+                    {
+                        return token["type"].ToString();
+                    }
+                    else {
+                        return null;
+
+                    }
                 }
                 catch (KeyNotFoundException)
-                {
-                    return "Unable to get type. Please try again later";
-                }
-                catch (NullReferenceException)
-                {
-                    return null;
-                }
-            } else
+            {
+                return "Unable to get type. Please try again later";
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+        } else
             {
                 return null;
             }
         }
 
-    }
+}
 }
