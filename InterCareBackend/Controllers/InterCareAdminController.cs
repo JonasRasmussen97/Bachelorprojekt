@@ -50,8 +50,6 @@ namespace InterCareBackend.Controllers
         [HttpDelete("/api/deleteInterCareAdminByEmail")]
         public string delete()
         {
-            
-
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             IDictionary<string, object> token = this.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
@@ -65,7 +63,5 @@ namespace InterCareBackend.Controllers
             }
 
         }
-
-
     }
 }

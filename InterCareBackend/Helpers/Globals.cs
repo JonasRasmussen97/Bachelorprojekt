@@ -7,6 +7,9 @@ namespace InterCareBackend.Helpers
 {
     public class Globals
     {
+        // GLOBAL OBJECTS.
+        public static AuthHelper auth = new AuthHelper();
+
         // STATUS MESSAGES
         public static string GlobalInvalidType = "You are not allowed!";
         public static string GlobalValidType = "Success!";
