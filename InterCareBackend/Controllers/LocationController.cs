@@ -16,7 +16,15 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createLocation")]
         public void createLocation()
         {
-            locationDao.createLocation("Odense", "Testvej 100", "DK-5000", "Denmark", "images", new List<string> { "Manager1", "Manager2" });
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
+            {
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalLocationManager)
+                {
+                    locationDao.createLocation("Odense", "Testvej 100", "DK-5000", "Denmark", "images", new List<string> {token["id"].ToString()});
+                }
+            }
         }
 
         // Should get a legit id
