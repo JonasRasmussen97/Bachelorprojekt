@@ -59,7 +59,7 @@ namespace InterCareBackend.Controllers
         public List<Organization> getAllOrganizationsAsClient()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
         if(token["type"].ToString() == Globals.GlobalClient || token["type"].ToString() == Globals.GlobalLocationManager || token["type"].ToString() == Globals.GlobalOrganizationAdmin) { 
             return organizationDao.getAllOrganizationsAsClient();
             } else
