@@ -152,7 +152,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
         // Deletes the whole organization and anything connected to it. This includes location(s), location manager(s) and the organization admin(s). 
-        public async void deleteEntireOrganization(String name)
+        public void deleteEntireOrganization(String name)
         {
             // Removes organization and it's connection admin in users collection
 
