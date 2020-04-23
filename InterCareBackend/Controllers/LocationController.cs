@@ -16,7 +16,7 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createLocation")]
         public void createLocation()
         {
-            locationDao.createLocation("Nyborg", "Odensevej 100000", "DK-5000", "Denmark", "images", new List<string> { "Polle", "Heino" });
+            locationDao.createLocation("Odense", "Testvej 100", "DK-5000", "Denmark", "images", new List<string> { "Manager1", "Manager2" });
         }
 
         // Should get a legit id
@@ -30,7 +30,7 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getLocationsByOrganizationName")]
         public List<Location> getLocationsFromOrganization()
         {
-            return locationDao.getLocationsFromOrganization("Sygehus");
+            return locationDao.getLocationsFromOrganization("Test Organization");
         }
 
         // Used by LocationManager
@@ -52,14 +52,14 @@ namespace InterCareBackend.Controllers
         [HttpPut("/api/updateLocation")]
         public void updateLocation()
         {
-            locationDao.updateLocation("Nyborg", "Country", "Germany");
+            locationDao.updateLocation("Odense", "Country", "Denmark");
         }
 
 
         [HttpDelete("api/deleteLocationByName")]
         public void deleteOrganization()
         {
-            locationDao.deleteLocationByName("Nyborg");
+            locationDao.deleteLocationByName("Odense");
         }
 
 

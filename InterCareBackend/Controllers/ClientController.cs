@@ -22,7 +22,7 @@ namespace InterCareBackend.Controllers
             if (token["type"].ToString() == Globals.GlobalClient)
             {
 
-                clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
+                clientDao.createClient("client@test.dk", "Pass", "Client Jensen", "0", Globals.GlobalClient, "Male", "23");
                 return Globals.GlobalValidType;
             }
             else
@@ -59,7 +59,7 @@ namespace InterCareBackend.Controllers
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalClient)
             {
-                clientDao.deleteClient("Jonar17@student.sdu.dk");
+                clientDao.deleteClient("client@test.dk");
                 return Globals.GlobalValidType;
             }
             else

@@ -14,14 +14,14 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createOrganization")]
         public void createOrganization()
         {
-            organizationDao.createOrganization("Amazon", new List<string> { "Odense", "Aarhus" }, "BobId");
+            organizationDao.createOrganization("Test Organization", new List<string> { "Odense", "Aarhus" }, "AdminsId");
         }
 
 
         [HttpGet("/api/getOrganizationByName")]
         public Organization getOrganization()
         {
-            return organizationDao.getOrganization("Amazon");
+            return organizationDao.getOrganization("Test Organization");
         }
 
         // Used by OrganizationAdmin
@@ -71,7 +71,7 @@ namespace InterCareBackend.Controllers
         [HttpDelete("api/deleteOrganizationByName")]
         public void deleteOrganization()
         {
-            organizationDao.deleteOrganization("TestOrg");
+            organizationDao.deleteOrganization("Test Organization");
         }
 
         [HttpDelete("api/deleteEntireOrganization")]
