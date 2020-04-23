@@ -10,6 +10,7 @@ namespace InterCareBackend.Controllers
 
         UserDao userDao = new UserDao();
 
+        // Used by InterCareAdmin
         [HttpGet("/api/getAllUsers")]
         public List<User> getAllUsers()
         {

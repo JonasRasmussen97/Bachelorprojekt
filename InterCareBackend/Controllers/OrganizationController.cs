@@ -25,6 +25,7 @@ namespace InterCareBackend.Controllers
             return organizationDao.getOrganization("Amazon");
         }
 
+        // Used by OrganizationAdmin
         [HttpGet("/api/getOrganizationFromAdminId")]
         public Organization getOrganizationFromAdminId()
         {
@@ -33,13 +34,14 @@ namespace InterCareBackend.Controllers
             return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
         }
         
-
+        // Used by InterCareAdmin
         [HttpGet("/api/getAllOrganizations")]
         public List<Organization> getAllOrganizations()
         {
             return organizationDao.getAllOrganizations();
         }
 
+        // Used by Client, LocationManager and OrganizationAdmin
         [HttpGet("/api/getAllOrganizationsAsClient")]
         public List<Organization> getAllOrganizationsAsClient()
         {
