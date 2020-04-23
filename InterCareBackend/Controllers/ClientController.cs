@@ -16,34 +16,29 @@ namespace InterCareBackend.Controllers
 
         [HttpPost("/api/createClient")]
         public string create()
-        {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalClient)
-            {
-
-                clientDao.createClient("client@test.dk", "Pass", "Client Jensen", "0", Globals.GlobalClient, "Male", "23");
-                return Globals.GlobalValidType;
-            }
-            else
-            {
-                return Globals.GlobalInvalidType;
-            }
+        {       
+                clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
+                return Globals.GlobalValidType; 
         }
 
 
         [HttpGet("/api/getClientByEmail")]
         public Client get()
         {
-
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-
-            if (token["type"].ToString() == Globals.GlobalClient)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return clientDao.getClientByEmail(token["username"].ToString());
-            }
-            else
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+
+                if (token["type"].ToString() == Globals.GlobalClient)
+                {
+                    return clientDao.getClientByEmail(token["username"].ToString());
+                }
+                else
+                {
+                    return null;
+                }
+            } else
             {
                 return null;
             }
@@ -54,15 +49,20 @@ namespace InterCareBackend.Controllers
         [HttpDelete("/api/deleteClientByEmail")]
         public String deleteClient()
         {
-
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalClient)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                clientDao.deleteClient("client@test.dk");
-                return Globals.GlobalValidType;
-            }
-            else
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalClient)
+                {
+                    clientDao.deleteClient("Jonar17@student.sdu.dk");
+                    return Globals.GlobalValidType;
+                }
+                else
+                {
+                    return Globals.GlobalInvalidType;
+                }
+            } else
             {
                 return Globals.GlobalInvalidType;
             }

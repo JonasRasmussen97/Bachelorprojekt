@@ -37,11 +37,18 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getLocationFromManagerId")]
         public Location getLocationFromManagerId()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalLocationManager)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return locationDao.getLocationFromManagerId(token["id"].ToString());
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalLocationManager)
+                {
+                    return locationDao.getLocationFromManagerId(token["id"].ToString());
+                }
+                else
+                {
+                    return null;
+                }
             } else
             {
                 return null;

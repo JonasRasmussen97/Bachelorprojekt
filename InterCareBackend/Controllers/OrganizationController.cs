@@ -28,11 +28,18 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getOrganizationFromAdminId")]
         public Organization getOrganizationFromAdminId()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalOrganizationAdmin)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalOrganizationAdmin)
+                {
+                    return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
+                }
+                else
+                {
+                    return null;
+                }
             } else
             {
                 return null;
@@ -43,11 +50,18 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getAllOrganizations")]
         public List<Organization> getAllOrganizations()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return organizationDao.getAllOrganizations();
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+                {
+                    return organizationDao.getAllOrganizations();
+                }
+                else
+                {
+                    return null;
+                }
             } else
             {
                 return null;
@@ -58,10 +72,18 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getAllOrganizationsAsClient")]
         public List<Organization> getAllOrganizationsAsClient()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-        if(token["type"].ToString() == Globals.GlobalClient || token["type"].ToString() == Globals.GlobalLocationManager || token["type"].ToString() == Globals.GlobalOrganizationAdmin) { 
-            return organizationDao.getAllOrganizationsAsClient();
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
+            {
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalClient || token["type"].ToString() == Globals.GlobalLocationManager || token["type"].ToString() == Globals.GlobalOrganizationAdmin)
+                {
+                    return organizationDao.getAllOrganizationsAsClient();
+                }
+                else
+                {
+                    return null;
+                }
             } else
             {
                 return null;

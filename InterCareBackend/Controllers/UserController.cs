@@ -15,15 +15,20 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getAllUsers")]
         public List<User> getAllUsers()
         {
-
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-
-            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return userDao.getAllUsers();
-            }
-            else
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+
+                if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+                {
+                    return userDao.getAllUsers();
+                }
+                else
+                {
+                    return null;
+                }
+            } else
             {
                 return null;
             }

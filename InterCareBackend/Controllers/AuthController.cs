@@ -33,15 +33,23 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getUserType")]
         public string getUserType()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
-            try
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return token["type"].ToString();
-            } catch(KeyNotFoundException)
-            {
-                return "Unable to get type. Please try again later";
-            } catch(NullReferenceException)
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = this.auth.decodeJWT(header);
+                try
+                {
+                    return token["type"].ToString();
+                }
+                catch (KeyNotFoundException)
+                {
+                    return "Unable to get type. Please try again later";
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            } else
             {
                 return null;
             }

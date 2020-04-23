@@ -14,16 +14,24 @@ namespace InterCareBackend.Controllers
         [HttpPost("/api/createLocationManager")]
         public string create()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalLocationManager)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                managerDao.createManager("LocationManager@test.dk", "Pass", "Poul Andersen", "0", Globals.GlobalLocationManager);
-                return "Manager has been created!";
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalLocationManager)
+                {
+                    managerDao.createManager("LocationManager@test.dk", "Pass", "Poul Andersen", "0", Globals.GlobalLocationManager);
+                    return "Manager has been created!";
+                }
+                else
+                {
+                    return "Unable to create manager.";
+                }
             } else
             {
                 return "Unable to create manager.";
-            }
+            } 
+           
         }
 
 
@@ -31,11 +39,18 @@ namespace InterCareBackend.Controllers
 
         public LocationManager getManagerByEmail()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalLocationManager)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                return managerDao.getLocationManagerByEmail("Test@test.dk");
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalLocationManager)
+                {
+                    return managerDao.getLocationManagerByEmail("Test@test.dk");
+                }
+                else
+                {
+                    return null;
+                }
             } else
             {
                 return null;
@@ -46,12 +61,19 @@ namespace InterCareBackend.Controllers
         [HttpDelete("/api/deleteLocationManagerByEmail")]
         public string delete()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
-            if (token["type"].ToString() == Globals.GlobalOrganizationAdmin || token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
-                managerDao.deleteManager("Test@test.dk");
-                return "Manager has been deleted";
+                var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+                if (token["type"].ToString() == Globals.GlobalOrganizationAdmin || token["type"].ToString() == Globals.GlobalInterCareAdmin)
+                {
+                    managerDao.deleteManager("Test@test.dk");
+                    return "Manager has been deleted";
+                }
+                else
+                {
+                    return "Could not delete manager!";
+                }
             } else
             {
                 return "Could not delete manager!";
