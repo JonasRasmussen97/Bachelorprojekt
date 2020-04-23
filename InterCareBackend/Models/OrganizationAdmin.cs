@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
@@ -30,7 +28,7 @@ namespace InterCareBackend.Models
             throw new NotImplementedException();
         }
 
-        public Boolean createLocation(String name, String address, String postalCode, String country, ArrayList images, Dictionary<String, LocationManager> managers) 
+        public Boolean createLocation(string name, string address, string postalCode, string country, ArrayList images, Dictionary<string, LocationManager> managers) 
         {
             return true;
         }
@@ -44,7 +42,6 @@ namespace InterCareBackend.Models
         {
             return true;
         }
-
 
 
     }

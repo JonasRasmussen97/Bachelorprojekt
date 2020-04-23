@@ -2,10 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Daos.Implementations
 {
@@ -44,7 +41,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public InterCareAdmin getInterCareAdminByEmail(String email)
+        public InterCareAdmin getInterCareAdminByEmail(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -61,7 +58,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void deleteInterCareAdmin(String email)
+        public void deleteInterCareAdmin(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -70,8 +67,5 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-
     }
-
-
 }

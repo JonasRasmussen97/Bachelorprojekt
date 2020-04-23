@@ -3,7 +3,6 @@ using InterCareBackend.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,7 +25,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void createOrganization(string name, List<String> locations, string adminId)
+        public void createOrganization(string name, List<string> locations, string adminId)
         {
             db.setCollection("organizations");
             var doc = new BsonDocument
@@ -40,7 +39,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public Organization getOrganization(String name)
+        public Organization getOrganization(string name)
         {
             // Query searches for any record with the name parameter being the entered name.
             db.setCollection("organizations");
@@ -131,7 +130,7 @@ namespace InterCareBackend.Daos.Implementations
                     organizations.Add(new Organization(organizationObject["_id"].ToString(), organizationObject["Name"].ToString(), locations, organizationObject["AdminId"].ToString()));
                 }
                 return organizations;
-            } 
+            }
             else
             {
                 return null;
@@ -139,7 +138,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void deleteOrganization(String name)
+        public void deleteOrganization(string name)
         {
             // Removes organization
             db.setCollection("organizations");
@@ -152,7 +151,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
         // Deletes the whole organization and anything connected to it. This includes location(s), location manager(s) and the organization admin(s). 
-        public void deleteEntireOrganization(String name)
+        public void deleteEntireOrganization(string name)
         {
             // Removes organization and it's connection admin in users collection
 
@@ -184,9 +183,6 @@ namespace InterCareBackend.Daos.Implementations
                 filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationList[i].Id));
                 db.getCollection().DeleteOne(filter);
             }
-
-
-
 
 
             deleteOrganization(name);

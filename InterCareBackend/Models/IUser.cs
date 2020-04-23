@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace InterCareBackend.Models
+﻿namespace InterCareBackend.Models
 {
     public interface IUser
     {
 
-        String Email { get; set; }
-        String Password { get; set; }
-        String FullName { get; set; }
-        String AccessLevel { get; set; }
-        String Type { get; set; }
+        string Email { get; set; }
+        string Password { get; set; }
+        string FullName { get; set; }
+        string AccessLevel { get; set; }
+        string Type { get; set; }
 
         void Login();
         void Logout(); 

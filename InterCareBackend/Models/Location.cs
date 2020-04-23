@@ -1,25 +1,21 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InterCareBackend.Models
 {
     public class Location
     {
         [BsonId]
-        public String Id { get; set; }
-        public String Name { get; set; }
-        public String Address { get; set; }
-        public String PostalCode { get; set; }
-        public String Country { get; set; }
-        public String Images { get; set; }
-        public List<String> Managers { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string Images { get; set; }
+        public List<string> Managers { get; set; }
 
 
-        public Location(String name, String address, String PostalCode, String Country, String Images, List<String> Managers)
+        public Location(string name, string address, string PostalCode, string Country, string Images, List<string> Managers)
         {
             this.Name = name;
             this.Address = address;
@@ -29,7 +25,7 @@ namespace InterCareBackend.Models
             this.Managers = Managers;
         }
 
-        public Location(String id, String name, String address, String PostalCode, String Country, String Images, List<String> Managers)
+        public Location(string id, string name, string address, string PostalCode, string Country, string Images, List<string> Managers)
         {
             this.Name = name;
             this.Address = address;
