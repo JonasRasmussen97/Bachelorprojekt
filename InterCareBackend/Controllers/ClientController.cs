@@ -1,7 +1,6 @@
 ﻿using InterCareBackend.Daos.Implementations;
 using InterCareBackend.Helpers;
 using InterCareBackend.Models;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,33 +12,61 @@ namespace InterCareBackend.Controllers
     {
 
         ClientDao clientDao = new ClientDao();
-        AuthHelper helper = new AuthHelper();
+        AuthHelper auth = new AuthHelper();
 
 
         [HttpPost("/api/createClient")]
-        public void create()
+        public String create()
         {
-            clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            if (token["type"].ToString() == Globals.GlobalClient)
+            {
 
+                clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
+                return Globals.GlobalValidType;
+            }
+            else
+            {
+                return Globals.GlobalInvalidType;
+            }
         }
 
 
         [HttpGet("/api/getClientByEmail")]
         public Client get()
         {
-            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = helper.decodeJWT(header);
-           
-                return clientDao.getClientByEmail(token["username"].ToString());
-        }
 
-      
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = auth.decodeJWT(header);
+
+            if (token["type"].ToString() == Globals.GlobalClient)
+            {
+                return clientDao.getClientByEmail(token["username"].ToString());
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
 
         [HttpDelete("/api/deleteClientByEmail")]
-        public void deleteClient()
+        public String deleteClient()
         {
-            clientDao.deleteClient("Jonar17@student.sdu.dk");
+
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            if (token["type"].ToString() == Globals.GlobalClient)
+            {
+                clientDao.deleteClient("Jonar17@student.sdu.dk");
+                return Globals.GlobalValidType;
+            }
+            else
+            {
+                return Globals.GlobalInvalidType;
+            }
         }
     }
 }
