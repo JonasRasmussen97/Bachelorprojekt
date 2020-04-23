@@ -10,7 +10,6 @@ namespace InterCareBackend.Controllers
     {
 
         OrganizationDao organizationDao = new OrganizationDao();
-        AuthHelper auth = new AuthHelper();
 
         [HttpPost("/api/createOrganization")]
         public void createOrganization()
@@ -30,7 +29,7 @@ namespace InterCareBackend.Controllers
         public Organization getOrganizationFromAdminId()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalOrganizationAdmin)
             {
                 return organizationDao.getOrganizationFromAdminId(token["id"].ToString());
@@ -45,7 +44,7 @@ namespace InterCareBackend.Controllers
         public List<Organization> getAllOrganizations()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 return organizationDao.getAllOrganizations();

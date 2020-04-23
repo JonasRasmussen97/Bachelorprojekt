@@ -1,11 +1,12 @@
 ﻿using InterCareBackend.Daos.Implementations;
+using InterCareBackend.Helpers;
 using InterCareBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace InterCareBackend.Controllers
 {
-    public class UserController
+    public class UserController : ControllerBase
     {
 
         UserDao userDao = new UserDao();
@@ -14,7 +15,20 @@ namespace InterCareBackend.Controllers
         [HttpGet("/api/getAllUsers")]
         public List<User> getAllUsers()
         {
-            return userDao.getAllUsers();
+
+            var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
+
+            if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
+            {
+                return userDao.getAllUsers();
+            }
+            else
+            {
+                return null;
+            }
+
         }
+
     }
 }

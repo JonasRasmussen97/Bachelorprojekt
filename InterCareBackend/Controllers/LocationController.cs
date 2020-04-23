@@ -11,7 +11,6 @@ namespace InterCareBackend.Controllers
     {
 
         LocationDao locationDao = new LocationDao();
-        AuthHelper auth = new AuthHelper();
 
 
         [HttpPost("/api/createLocation")]
@@ -39,7 +38,7 @@ namespace InterCareBackend.Controllers
         public Location getLocationFromManagerId()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalLocationManager)
             {
                 return locationDao.getLocationFromManagerId(token["id"].ToString());

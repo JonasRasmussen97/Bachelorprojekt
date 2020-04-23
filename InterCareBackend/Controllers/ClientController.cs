@@ -12,14 +12,13 @@ namespace InterCareBackend.Controllers
     {
 
         ClientDao clientDao = new ClientDao();
-        AuthHelper auth = new AuthHelper();
 
 
         [HttpPost("/api/createClient")]
         public String create()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalClient)
             {
 
@@ -38,7 +37,7 @@ namespace InterCareBackend.Controllers
         {
 
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
 
             if (token["type"].ToString() == Globals.GlobalClient)
             {
@@ -57,7 +56,7 @@ namespace InterCareBackend.Controllers
         {
 
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalClient)
             {
                 clientDao.deleteClient("Jonar17@student.sdu.dk");

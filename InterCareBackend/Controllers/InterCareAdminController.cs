@@ -10,13 +10,12 @@ namespace InterCareBackend.Controllers
     {
 
         InterCareAdminDao interCareAdminDao = new InterCareAdminDao();
-        AuthHelper auth = new AuthHelper();
 
         [HttpPost("/api/createInterCareAdmin")]
         public string create()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 interCareAdminDao.createInterCareAdmin("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalInterCareAdmin);
@@ -34,7 +33,7 @@ namespace InterCareBackend.Controllers
         public InterCareAdmin getAdminByEmail()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
 
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
@@ -51,7 +50,7 @@ namespace InterCareBackend.Controllers
         public string delete()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 interCareAdminDao.deleteInterCareAdmin("Jonar17@student.sdu.dk");

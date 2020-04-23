@@ -11,14 +11,13 @@ namespace InterCareBackend.Controllers
     {
         OrganizationAdminDao adminDao = new OrganizationAdminDao();
         OrganizationDao organizationDao = new OrganizationDao();
-        AuthHelper auth = new AuthHelper();
 
 
         [HttpPost("/api/createAdminWithOrganization")]
         public String create()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if(token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 adminDao.createAdmin("Jonar17@student.sdu.dk", "Jonas Støve Rasmussen", "Pass", "0", Globals.GlobalOrganizationAdmin);
@@ -37,7 +36,7 @@ namespace InterCareBackend.Controllers
         public OrganizationAdmin getAdminByEmail()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 return adminDao.getAdminByEmail("Jonar17@student.sdu.dk");
@@ -52,7 +51,7 @@ namespace InterCareBackend.Controllers
         public string delete()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-            IDictionary<string, object> token = this.auth.decodeJWT(header);
+            IDictionary<string, object> token = Globals.auth.decodeJWT(header);
             if (token["type"].ToString() == Globals.GlobalInterCareAdmin)
             {
                 adminDao.deleteAdmin("Jonar17@student.sdu.dk");
