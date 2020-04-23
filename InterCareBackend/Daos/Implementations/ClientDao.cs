@@ -38,7 +38,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public Client getClientByEmail(String email)
+        public Client getClientByEmail(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -55,7 +55,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void deleteClient(String email)
+        public void deleteClient(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);

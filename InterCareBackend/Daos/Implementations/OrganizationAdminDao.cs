@@ -39,7 +39,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public OrganizationAdmin getAdminByEmail(String email)
+        public OrganizationAdmin getAdminByEmail(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);
@@ -56,7 +56,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
 
-        public void deleteAdmin(String email)
+        public void deleteAdmin(string email)
         {
             db.setCollection("users");
             filter = Builders<BsonDocument>.Filter.Eq("Email", email);

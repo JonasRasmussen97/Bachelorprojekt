@@ -2,7 +2,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,11 +17,11 @@ namespace InterCareBackend.Daos.Implementations
 
         public LocationDao()
         {
-            db = new Database("InterCare", "locations"); 
+            db = new Database("InterCare", "locations");
         }
 
 
-        public void createLocation(string name, string address, string postalCode, string country, string images, List<String> managers)
+        public void createLocation(string name, string address, string postalCode, string country, string images, List<string> managers)
         {
             db.setCollection("locations");
             var document = new BsonDocument {
@@ -57,36 +56,36 @@ namespace InterCareBackend.Daos.Implementations
             }
         }
 
-        
-        public List<Location> getLocationsFromOrganization(string name) 
+
+        public List<Location> getLocationsFromOrganization(string name)
         {
-                db.setCollection("organizations");
-                filter = Builders<BsonDocument>.Filter.Eq("Name", name);
-                List<Location> locations = new List<Location>();
-                if (db.getCollection().Find(filter).FirstOrDefault() != null)
-                {
-                    // We retrieve the Organization first and the location id's connected to it. We save each id to a list called locationsList.
-                    var organization = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                    List<string> locationsList = BsonSerializer.Deserialize<List<string>>(organization["Locations"].ToJson());
+            db.setCollection("organizations");
+            filter = Builders<BsonDocument>.Filter.Eq("Name", name);
+            List<Location> locations = new List<Location>();
+            if (db.getCollection().Find(filter).FirstOrDefault() != null)
+            {
+                // We retrieve the Organization first and the location id's connected to it. We save each id to a list called locationsList.
+                var organization = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
+                List<string> locationsList = BsonSerializer.Deserialize<List<string>>(organization["Locations"].ToJson());
 
 
                 // For each location id(in locationsList) in the organization, we want to retrieve the location object from the locations collection.
                 // We run through a for-loop and get each location object for each id + The manager lists. Then we create the location object and add it to our 'locations' object.
                 // The 'locations' object contains all the new location objects that were found on the organization object we entered the name for in the beginning.
                 db.setCollection("locations");
-                    for (int i = 0; i < locationsList.Count; i++)
-                    {
-                        filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationsList[i]));
-                        var locationObj = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
-                        List<string> managersList = BsonSerializer.Deserialize<List<string>>(locationObj["Managers"].ToJson());
-                        locations.Add(new Location(locationObj["_id"].ToString(), locationObj["Name"].ToString(), locationObj["Address"].ToString(), locationObj["PostalCode"].ToString(), locationObj["Country"].ToString(), locationObj["Images"].ToString(), managersList));
-                }
-                    return locations;
-                }
-                else
+                for (int i = 0; i < locationsList.Count; i++)
                 {
-                    return null;
-                } 
+                    filter = Builders<BsonDocument>.Filter.Eq("_id", new ObjectId(locationsList[i]));
+                    var locationObj = BsonSerializer.Deserialize<BsonDocument>(db.getCollection().Find(filter).FirstOrDefault().ToJson());
+                    List<string> managersList = BsonSerializer.Deserialize<List<string>>(locationObj["Managers"].ToJson());
+                    locations.Add(new Location(locationObj["_id"].ToString(), locationObj["Name"].ToString(), locationObj["Address"].ToString(), locationObj["PostalCode"].ToString(), locationObj["Country"].ToString(), locationObj["Images"].ToString(), managersList));
+                }
+                return locations;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Location getLocationFromManagerId(string id)
@@ -95,16 +94,16 @@ namespace InterCareBackend.Daos.Implementations
             if (db.getCollection() != null)
             {
                 var documents = db.getCollection().Find(new BsonDocument()).ToList();
-                
+
                 foreach (BsonDocument doc in documents)
                 {
                     var locationObject = BsonSerializer.Deserialize<BsonDocument>(doc.ToJson());
                     List<string> managers = BsonSerializer.Deserialize<List<string>>(locationObject["Managers"].ToJson());
                     for (int i = 0; i < managers.Count; i++)
                     {
-                        if(managers[i] == id)
+                        if (managers[i] == id)
                         {
-                          return new Location(locationObject["_id"].ToString(), locationObject["Name"].ToString(), locationObject["Address"].ToString(), locationObject["PostalCode"].ToString(), locationObject["Country"].ToString(), locationObject["Images"].ToString(), managers);
+                            return new Location(locationObject["_id"].ToString(), locationObject["Name"].ToString(), locationObject["Address"].ToString(), locationObject["PostalCode"].ToString(), locationObject["Country"].ToString(), locationObject["Images"].ToString(), managers);
                         }
                     }
                 }
@@ -113,7 +112,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
         // Takes the name of the location and the field we want to update, and the value we want to update it with.
-        public void updateLocation(String locationName, String updateField, String updateValue)
+        public void updateLocation(string locationName, string updateField, string updateValue)
         {
             db.setCollection("locations");
             var filter = Builders<BsonDocument>.Filter.Eq("Name", locationName);
@@ -122,7 +121,7 @@ namespace InterCareBackend.Daos.Implementations
         }
 
         // Also removes the connected location manager because he cannot exist without a location.
-        public void deleteLocationByName(String name)
+        public void deleteLocationByName(string name)
         {
             db.setCollection("locations");
             var filter = Builders<BsonDocument>.Filter.Eq("Name", name);

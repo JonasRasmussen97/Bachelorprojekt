@@ -17,7 +17,7 @@ namespace InterCareBackend.Helpers
     public class AuthHelper : ControllerBase
     {
         // The secret that is used to authorize if people are allowed to access endpoints.
-        String secret = "mU1ojWk5LvBlr7A94v8iEIfKEk5QIy9s";
+        string secret = "mU1ojWk5LvBlr7A94v8iEIfKEk5QIy9s";
         Database db = new Database("InterCare", "users");
         JwtBuilder builder;
         IMongoCollection<BsonDocument> collection;
@@ -35,7 +35,7 @@ namespace InterCareBackend.Helpers
         }
 
         // Decodes the JWT and returns it as a dictionary.
-        public IDictionary<string, object> decodeJWT(String JWT)
+        public IDictionary<string, object> decodeJWT(string JWT)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace InterCareBackend.Helpers
 
 
 
-        public IActionResult checkLogin(String username, String password)
+        public IActionResult checkLogin(string username, string password)
         {
             System.Diagnostics.Debug.WriteLine(username + " and " + password);
 

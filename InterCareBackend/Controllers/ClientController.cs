@@ -15,7 +15,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpPost("/api/createClient")]
-        public String create()
+        public string create()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             IDictionary<string, object> token = Globals.auth.decodeJWT(header);

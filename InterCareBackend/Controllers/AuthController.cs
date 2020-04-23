@@ -21,7 +21,7 @@ namespace InterCareBackend.Controllers
 
        
         [HttpGet("/api/test")]
-        public String testJWT()
+        public string testJWT()
         {
 
             return auth.getBuilder()
@@ -31,7 +31,7 @@ namespace InterCareBackend.Controllers
 
         // This method is used to validate that a user has access to a given site in frontend. It returns the type of the logged in user based on his/her JWT.
         [HttpGet("/api/getUserType")]
-        public String getUserType()
+        public string getUserType()
         {
             var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
             IDictionary<string, object> token = this.auth.decodeJWT(header);
