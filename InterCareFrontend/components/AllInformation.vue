@@ -4,7 +4,7 @@
 <h2>Organizations</h2>
     <b-table striped hover dark responsive="sm" :fields="fields" :items="items">
       <template v-slot:cell(edit)>
-      <b-button @click="methodHere()" size="sm">Edit</b-button>
+      <b-button size="sm">Edit</b-button>
       </template>
     </b-table>
      <div class="row">
@@ -15,7 +15,7 @@
  <div>
     <b-table striped hover dark responsive="sm" :fields="fields2" :items="items2">
       <template v-slot:cell(edit)>
-      <b-button @click="methodHere()" size="sm">Edit</b-button>
+      <b-button size="sm">Edit</b-button>
       </template>
     </b-table>
   </div>
