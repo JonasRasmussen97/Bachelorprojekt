@@ -9,14 +9,6 @@
     </b-table>
         <div class="row">
     <div class="col">
-<h2>Organization Locations</h2>
- <div>
-    <b-table striped hover dark responsive="sm" :fields="fields2" :items="items2">
-      <template v-slot:cell(edit)>
-      <b-button size="sm">Edit</b-button>
-      </template>
-    </b-table>
-  </div>
       </div> 
     </div>
   </div>

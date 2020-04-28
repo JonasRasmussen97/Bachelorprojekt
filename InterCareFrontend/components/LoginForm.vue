@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <div v-if="Token === undefined" class="login-form">
         <h2 class="text-center">Log in</h2>       
         <div  class="form-group">
@@ -16,6 +17,7 @@
     <p class="text-center"><a href="#">Create an Account</a></p>
     <p class="text-center">Login status: {{status}}</p>
   </div>
+</client-only>
 </template>
 
 

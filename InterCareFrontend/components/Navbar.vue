@@ -1,4 +1,5 @@
 <template>
+<client-only>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -19,6 +20,7 @@
       </b-collapse>
     </b-navbar>
   </div>
+</client-only>
 </template>
 
 <script>
