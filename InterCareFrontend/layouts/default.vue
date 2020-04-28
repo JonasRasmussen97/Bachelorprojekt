@@ -1,11 +1,33 @@
 <template>
   <div>
+    <div class="wrapping">
+     <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-4">
+          <div class="logo">InterCare</div>
+        </div>
+        <div class="col-8">
+          <Navbar></Navbar>
+        </div>
+      </div>
+      </div>
+      </div>
     <nuxt />
   </div>
 </template>
 
+<script>
+import Navbar from "~/components/Navbar";
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
+
 <style>
 html {
+  background-color:#3c68b9; 
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
@@ -16,6 +38,11 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+
+.wrapping {
+  background-color:#3c68b9; 
+}
+
 
 *,
 *:before,

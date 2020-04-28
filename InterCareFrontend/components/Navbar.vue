@@ -10,13 +10,10 @@
           <b-nav-item href="/Manager">Manager</b-nav-item>
           <b-nav-item href="/OAdmin">Organization Admin</b-nav-item>
           <b-nav-item href="/Admin">InterCare Admin</b-nav-item>
-          <b-nav-item href="#" disabled>Statistics</b-nav-item>
           
           <b-nav-item-dropdown text="User">
-            <b-dropdown-item v-if="Token === undefined">Log In</b-dropdown-item>
-            <b-dropdown-item v-if="Token === undefined">Sign Up</b-dropdown-item>
-            <b-dropdown-item v-if="Token != undefined">My Profile</b-dropdown-item>
-            <b-dropdown-item v-if="Token != undefined" v-on:click="logout()">Logout</b-dropdown-item>
+            <b-dropdown-item v-if="Token === undefined" href="/">Log In</b-dropdown-item>
+            <b-dropdown-item v-if="Token != undefined" v-on:click="logout()" href="/">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav> 
       </b-collapse>

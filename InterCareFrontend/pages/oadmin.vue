@@ -1,14 +1,6 @@
 <template>
 <div class="wrap">
     <div class="container">
-      <div class="row justify-content-end">
-        <div class="col-4">
-          <div class="logo">InterCare</div>
-        </div>
-        <div class="col-8">
-          <Navbar></Navbar>
-        </div>
-      </div>
       <div class="row" v-if="type === 'Organization Admin'">
  <div class="col-12">
   <OrganizationAndLocations></OrganizationAndLocations>
