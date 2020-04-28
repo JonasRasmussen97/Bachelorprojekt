@@ -10,12 +10,14 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 export default {
   mounted() {
     this.getAllOrganizations();
   },
    data() {
       return {
+      token: Cookies.get('token'),
         items: [
           
         ]

@@ -244,3 +244,4 @@ C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\I
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.pdb
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.genruntimeconfig.cache
 C:\Users\finch\Github\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csprojAssemblyReference.cache
+C:\Users\SaltO\Documents\GitHub\Bachelorprojekt\InterCareBackend\obj\Debug\netcoreapp3.1\InterCareBackend.csprojAssemblyReference.cache
