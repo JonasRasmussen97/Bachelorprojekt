@@ -1,4 +1,5 @@
 <template>
+<client-only>
 <div class="col">
   <div class="row fixed-bottom text-center">
     <div class="col-4">Available on Android and iOS</div>
@@ -6,6 +7,7 @@
     <div class="col-4">Supported Browsers: Firefox, Chrome, Safari, Internet Explorer</div>
   </div>
   </div>
+  </client-only>
 </template>
 <style scoped>
 .row {
