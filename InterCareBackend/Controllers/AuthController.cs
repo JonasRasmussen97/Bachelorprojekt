@@ -19,16 +19,6 @@ namespace InterCareBackend.Controllers
             return tokenString;
         }
 
-
-        [HttpGet("/api/test")]
-        public string testJWT()
-        {
-
-            return auth.getBuilder()
-                .WithAlgorithm(new HMACSHA256Algorithm())
-                .Decode(Request.Headers["Authorization"]);
-        }
-
         // This method is used to validate that a user has access to a given site in frontend. It returns the type of the logged in user based on his/her JWT.
         [HttpGet("/api/getUserType")]
         public string getUserType()
