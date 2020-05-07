@@ -74,7 +74,6 @@ namespace InterCareBackend.Helpers
           .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(1).ToUnixTimeSeconds())
           .AddClaim("id", User["_id"])
           .AddClaim("username", username)
-          .AddClaim("password", password)
           .AddClaim("type", User["Type"])
           .Encode();
                     // If the password and username is found in the DB, then generate the JWT.
