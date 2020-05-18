@@ -10,12 +10,12 @@ namespace InterCareBackend.Controllers
     public class AuthController : ControllerBase
     {
 
-        AuthHelper auth = new AuthHelper();
+       
 
         [HttpPost("/api/login")]
         public IActionResult login()
         {
-            var tokenString = auth.checkLogin(Request.Form["email"], Request.Form["password"]);
+            var tokenString = Globals.auth.checkLogin(Request.Form["email"], Request.Form["password"]);
             return tokenString;
         }
 
@@ -26,7 +26,7 @@ namespace InterCareBackend.Controllers
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
                 var header = Request.Headers["Authorization"].ToString().Substring("Bearer ".Length).Trim();
-                IDictionary<string, object> token = this.auth.decodeJWT(header);
+                IDictionary<string, object> token = Globals.auth.decodeJWT(header);
                 try
                 {
                     if (token != null)

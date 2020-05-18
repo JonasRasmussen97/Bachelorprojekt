@@ -17,6 +17,7 @@ namespace InterCareBackend.Helpers
     public class AuthHelper : ControllerBase
     {
         // The secret that is used to authorize if people are allowed to access endpoints.
+        // Secret is 32 characters or 256 bits long, which lives up to the standard.
         string secret = "mU1ojWk5LvBlr7A94v8iEIfKEk5QIy9s";
         Database db = new Database("InterCare", "users");
         JwtBuilder builder;
