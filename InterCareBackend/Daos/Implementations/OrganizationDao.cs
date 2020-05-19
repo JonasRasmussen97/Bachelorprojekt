@@ -1,5 +1,4 @@
-﻿using InterCareBackend.Daos.Interfaces;
-using InterCareBackend.Models;
+﻿using InterCareBackend.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -8,7 +7,7 @@ using System.Linq;
 
 namespace InterCareBackend.Daos.Implementations
 {
-    public class OrganizationDao : IOrganizationDao
+    public class OrganizationDao 
     {
         // Instantiates the database connection. <<Database, Collection>>
         public Database db;

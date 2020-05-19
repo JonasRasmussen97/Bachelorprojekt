@@ -15,7 +15,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpPost("/api/createClient")]
-        public string create()
+        public string createClient()
         {       
                 clientDao.createClient("Jonar17@student.sdu.dk", "Pass", "Jonas Støve Rasmussen", "0", Globals.GlobalClient, "Male", "23");
                 return Globals.GlobalValidType; 
@@ -23,7 +23,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpGet("/api/getClientByEmail")]
-        public Client get()
+        public Client getClientByEmail()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
@@ -47,7 +47,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpDelete("/api/deleteClientByEmail")]
-        public String deleteClient()
+        public String deleteClientByEmail()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {

@@ -12,7 +12,7 @@ namespace InterCareBackend.Controllers
         InterCareAdminDao interCareAdminDao = new InterCareAdminDao();
 
         [HttpPost("/api/createInterCareAdmin")]
-        public string create()
+        public string createInterCareAdmin()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
@@ -57,7 +57,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpDelete("/api/deleteInterCareAdminByEmail")]
-        public string delete()
+        public string deleteInterCareAdminByEmail()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {

@@ -14,7 +14,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpPost("/api/createAdminWithOrganization")]
-        public string create()
+        public string createAdminWithOrganization()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
@@ -62,7 +62,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpDelete("/api/deleteAdminByEmail")]
-        public string delete()
+        public string deleteAdminByEmail()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {

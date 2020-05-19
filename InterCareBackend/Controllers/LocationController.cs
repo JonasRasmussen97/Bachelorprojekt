@@ -29,7 +29,7 @@ namespace InterCareBackend.Controllers
 
         // Should get a legit id
         [HttpGet("/api/getLocationById")]
-        public Location getOrganization()
+        public Location getLocationById()
         {
             return locationDao.getLocationById("5e79e3e908e5001d3c7e9016");
         }
@@ -72,7 +72,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpDelete("api/deleteLocationByName")]
-        public void deleteOrganization()
+        public void deleteLocationByName()
         {
             locationDao.deleteLocationByName("Odense");
         }

@@ -37,16 +37,6 @@ namespace InterCareBackend.Models
             this.AccessLevel = AccessLevel;
             this.Type = Type;
         }
-        public void Login()
-        {
-            // To be implemented.
-            throw new NotImplementedException();
-        }
-
-        public void Logout()
-        {
-            // To be implemented.
-            throw new NotImplementedException();
-        }
+     
     }
 }

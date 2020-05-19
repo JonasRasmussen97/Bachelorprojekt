@@ -19,7 +19,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpGet("/api/getOrganizationByName")]
-        public Organization getOrganization()
+        public Organization getOrganizationByName()
         {
             return organizationDao.getOrganization("Test Organization");
         }
@@ -91,7 +91,7 @@ namespace InterCareBackend.Controllers
         }
 
         [HttpDelete("api/deleteOrganizationByName")]
-        public void deleteOrganization()
+        public void deleteOrganizationByName()
         {
             organizationDao.deleteOrganization("Test Organization");
         }

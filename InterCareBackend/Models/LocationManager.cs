@@ -11,14 +11,6 @@ namespace InterCareBackend.Models
 
         }
 
-        public void Login()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Logout()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

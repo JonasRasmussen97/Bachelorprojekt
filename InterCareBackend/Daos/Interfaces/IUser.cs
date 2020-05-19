@@ -9,8 +9,6 @@
         string AccessLevel { get; set; }
         string Type { get; set; }
 
-        void Login();
-        void Logout(); 
 
     }
 }

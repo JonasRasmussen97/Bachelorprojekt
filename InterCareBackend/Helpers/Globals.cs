@@ -15,6 +15,8 @@ namespace InterCareBackend.Helpers
         public static string GlobalValidType = "Success!";
         public static string GlobalInvalidCredentials = "Wrong username or password. Try again!";
         public static string GlobalValidCrendetials = "You have been logged in!";
+        public static string GlobalCreateFailed = "Unable to create!";
+        public static string GlobalDeleteFailed = "Unable to delete!";
 
         // USER NAMING
         public static string GlobalInterCareAdmin = "InterCare Admin";

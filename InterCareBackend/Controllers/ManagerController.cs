@@ -12,7 +12,7 @@ namespace InterCareBackend.Controllers
         LocationManagerDao managerDao = new LocationManagerDao();
 
         [HttpPost("/api/createLocationManager")]
-        public string create()
+        public string createLocationManager()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
@@ -25,11 +25,11 @@ namespace InterCareBackend.Controllers
                 }
                 else
                 {
-                    return "Unable to create manager.";
+                    return Globals.GlobalCreateFailed;
                 }
             } else
             {
-                return "Unable to create manager.";
+                return Globals.GlobalCreateFailed;
             } 
            
         }
@@ -59,7 +59,7 @@ namespace InterCareBackend.Controllers
 
 
         [HttpDelete("/api/deleteLocationManagerByEmail")]
-        public string delete()
+        public string deleteLocationManagerByEmail()
         {
             if (Request.Headers["Authorization"].ToString().Contains("Bearer") == true)
             {
@@ -72,11 +72,11 @@ namespace InterCareBackend.Controllers
                 }
                 else
                 {
-                    return "Could not delete manager!";
+                    return Globals.GlobalDeleteFailed;
                 }
             } else
             {
-                return "Could not delete manager!";
+                return Globals.GlobalDeleteFailed;
             }
         }
 

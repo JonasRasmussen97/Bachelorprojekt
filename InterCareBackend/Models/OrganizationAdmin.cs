@@ -18,31 +18,6 @@ namespace InterCareBackend.Models
         }
 
 
-        public void Login()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Logout()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boolean createLocation(string name, string address, string postalCode, string country, ArrayList images, Dictionary<string, LocationManager> managers) 
-        {
-            return true;
-        }
-
-        public void editLocation(Location location)
-        {
-
-        }
-
-        public Boolean removeLocation(Location location)
-        {
-            return true;
-        }
-
 
     }
 }

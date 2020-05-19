@@ -13,15 +13,5 @@ namespace InterCareBackend.Models
             this.Gender = Gender;
             this.Age = Age;
         }
-
-        public void Login()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Logout()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
